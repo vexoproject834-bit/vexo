@@ -1,118 +1,1628 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-theme="dark">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>VEXO | Home — Engineered Sludge for Ozone Removal</title>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>VEXO | Engineered Sludge for Ozone Removal</title>
+
 <style>
-  :root[data-theme="dark"] { --bg:#060a12; --surface:#0e1626; --card:#131d31; --border:#1e2d4a; --primary:#10b981; --sec:#38bdf8; --accent:#f59e0b; --text:#f8fafc; --muted:#94a3b8; }
-  :root[data-theme="light"] { --bg:#f1f5f9; --surface:#ffffff; --card:#f8fafc; --border:#cbd5e1; --primary:#059669; --sec:#0284c7; --accent:#d97706; --text:#0f172a; --muted:#475569; }
-  * { box-sizing:border-box; margin:0; padding:0; font-family:system-ui,-apple-system,'Segoe UI',sans-serif; }
-  body { background:var(--bg); color:var(--text); line-height:1.6; transition:0.3s; min-height:100vh; display:flex; flex-direction:column; }
-  nav { position:sticky; top:0; z-index:100; background:var(--surface); border-bottom:1px solid var(--border); padding:0.8rem 1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; }
-  .brand { font-size:1.4rem; font-weight:900; color:var(--primary); text-decoration:none; }
-  .nav-links { display:flex; gap:0.5rem; flex-wrap:wrap; }
-  .nav-links a { color:var(--muted); text-decoration:none; font-size:0.85rem; font-weight:700; padding:0.4rem 0.7rem; border-radius:0.5rem; transition:0.2s; }
-  .nav-links a:hover, .nav-links a.active { color:var(--primary); background:rgba(16,185,129,0.12); }
-  .tools { display:flex; gap:0.4rem; }
-  .t-btn { background:var(--card); border:1px solid var(--border); color:var(--text); padding:0.35rem 0.65rem; border-radius:0.5rem; font-size:0.78rem; font-weight:700; cursor:pointer; }
-  .container { max-width:1100px; width:100%; margin:0 auto; padding:3rem 1.5rem; flex:1; }
-  .pill { display:inline-block; background:rgba(16,185,129,0.12); color:var(--primary); border:1px solid rgba(16,185,129,0.3); padding:0.35rem 0.9rem; border-radius:999px; font-size:0.75rem; font-weight:800; margin-bottom:1rem; }
-  h1 { font-size:clamp(2.1rem,4.5vw,3.4rem); font-weight:900; line-height:1.15; margin-bottom:1rem; }
-  .grad { background:linear-gradient(90deg,var(--primary),var(--sec)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-  .sub { color:var(--muted); max-width:700px; margin:0 auto 2rem; font-size:1.05rem; }
-  .btns { display:flex; gap:0.9rem; justify-content:center; flex-wrap:wrap; margin-bottom:3rem; }
-  .btn { padding:0.8rem 1.5rem; border-radius:0.75rem; font-weight:700; font-size:0.92rem; text-decoration:none; transition:0.2s; }
-  .btn-p { background:var(--primary); color:#fff; }
-  .btn-o { background:var(--surface); color:var(--text); border:1px solid var(--border); }
-  .grid-4 { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.1rem; }
-  .card { background:var(--surface); border:1px solid var(--border); border-radius:1.1rem; padding:1.5rem; }
-  .card-hi { border-color:var(--primary); }
-  footer { text-align:center; padding:1.5rem; color:var(--muted); font-size:0.85rem; border-top:1px solid var(--border); }
+
+/* =========================
+   THEME VARIABLES
+========================= */
+
+:root[data-theme="dark"] {
+  --bg:#060a12;
+  --surface:#0e1626;
+  --card:#131d31;
+  --border:#1e2d4a;
+  --primary:#10b981;
+  --sec:#38bdf8;
+  --accent:#f59e0b;
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --shadow:rgba(0,0,0,0.35);
+}
+
+:root[data-theme="light"] {
+  --bg:#f1f5f9;
+  --surface:#ffffff;
+  --card:#f8fafc;
+  --border:#cbd5e1;
+  --primary:#059669;
+  --sec:#0284c7;
+  --accent:#d97706;
+  --text:#0f172a;
+  --muted:#475569;
+  --shadow:rgba(15,23,42,0.12);
+}
+
+/* =========================
+   GLOBAL
+========================= */
+
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html {
+  scroll-behavior:smooth;
+}
+
+body {
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+
+  min-height:100vh;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+nav {
+  position:sticky;
+  top:0;
+  z-index:1000;
+
+  background:rgba(14,22,38,0.92);
+  backdrop-filter:blur(12px);
+
+  border-bottom:1px solid var(--border);
+
+  padding:0.8rem 1.5rem;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  flex-wrap:wrap;
+  gap:0.7rem;
+}
+
+:root[data-theme="light"] nav {
+  background:rgba(255,255,255,0.92);
+}
+
+.brand {
+  font-size:1.5rem;
+  font-weight:950;
+  color:var(--primary);
+  text-decoration:none;
+  letter-spacing:1px;
+}
+
+.nav-links {
+  display:flex;
+  gap:0.35rem;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.nav-links a {
+  color:var(--muted);
+  text-decoration:none;
+
+  font-size:0.82rem;
+  font-weight:750;
+
+  padding:0.45rem 0.7rem;
+
+  border-radius:0.55rem;
+
+  transition:0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color:var(--primary);
+  background:rgba(16,185,129,0.12);
+}
+
+.tools {
+  display:flex;
+  gap:0.4rem;
+}
+
+.t-btn {
+  background:var(--card);
+  border:1px solid var(--border);
+  color:var(--text);
+
+  padding:0.4rem 0.7rem;
+
+  border-radius:0.5rem;
+
+  font-size:0.75rem;
+  font-weight:750;
+
+  cursor:pointer;
+
+  transition:0.2s;
+}
+
+.t-btn:hover {
+  border-color:var(--primary);
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.container {
+  max-width:1150px;
+  width:100%;
+
+  margin:0 auto;
+
+  padding:4rem 1.5rem;
+
+  min-height:calc(100vh - 75px);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  text-align:center;
+  max-width:900px;
+  margin:0 auto 4rem;
+}
+
+.pill {
+  display:inline-block;
+
+  background:rgba(16,185,129,0.12);
+  color:var(--primary);
+
+  border:1px solid rgba(16,185,129,0.3);
+
+  padding:0.4rem 1rem;
+
+  border-radius:999px;
+
+  font-size:0.74rem;
+  font-weight:850;
+
+  margin-bottom:1.2rem;
+}
+
+h1 {
+  font-size:clamp(2.3rem,5vw,4rem);
+
+  font-weight:950;
+
+  line-height:1.08;
+
+  margin-bottom:1.2rem;
+}
+
+.grad {
+  background:
+    linear-gradient(
+      90deg,
+      var(--primary),
+      var(--sec)
+    );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+
+  -webkit-text-fill-color:transparent;
+}
+
+.sub {
+  color:var(--muted);
+
+  max-width:760px;
+
+  margin:0 auto 2rem;
+
+  font-size:1.05rem;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btns {
+  display:flex;
+
+  gap:0.9rem;
+
+  justify-content:center;
+
+  flex-wrap:wrap;
+
+  margin-bottom:3rem;
+}
+
+.btn {
+  display:inline-block;
+
+  padding:0.85rem 1.5rem;
+
+  border-radius:0.75rem;
+
+  font-weight:800;
+
+  font-size:0.9rem;
+
+  text-decoration:none;
+
+  transition:0.2s;
+}
+
+.btn:hover {
+  transform:translateY(-2px);
+}
+
+.btn-p {
+  background:var(--primary);
+  color:#fff;
+
+  box-shadow:
+    0 8px 25px rgba(16,185,129,0.2);
+}
+
+.btn-o {
+  background:var(--surface);
+  color:var(--text);
+
+  border:1px solid var(--border);
+}
+
+/* =========================
+   STATS
+========================= */
+
+.grid-4 {
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(210px,1fr));
+
+  gap:1rem;
+
+  margin-bottom:3rem;
+}
+
+.card {
+  background:var(--surface);
+
+  border:1px solid var(--border);
+
+  border-radius:1.1rem;
+
+  padding:1.4rem;
+
+  box-shadow:
+    0 10px 30px var(--shadow);
+
+  transition:
+    transform 0.25s,
+    border-color 0.25s;
+}
+
+.card:hover {
+  transform:translateY(-4px);
+  border-color:var(--primary);
+}
+
+.card-hi {
+  border-color:var(--primary);
+}
+
+.stat {
+  font-size:1.6rem;
+
+  font-weight:950;
+
+  margin-bottom:0.3rem;
+}
+
+.card h3 {
+  margin-bottom:0.35rem;
+}
+
+.card p {
+  color:var(--muted);
+
+  font-size:0.84rem;
+}
+
+/* =========================
+   IMAGE SECTION
+========================= */
+
+.section {
+  margin-top:4rem;
+}
+
+.section-title {
+  text-align:center;
+
+  margin-bottom:1.5rem;
+}
+
+.section-title h2 {
+  font-size:2rem;
+  font-weight:900;
+}
+
+.section-title p {
+  color:var(--muted);
+  margin-top:0.4rem;
+}
+
+.image-card {
+  background:var(--surface);
+
+  border:1px solid var(--border);
+
+  border-radius:1.2rem;
+
+  padding:1rem;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 10px 30px var(--shadow);
+}
+
+.image-card img {
+  width:100%;
+
+  display:block;
+
+  border-radius:0.8rem;
+
+  max-height:650px;
+
+  object-fit:contain;
+
+  background:#07101b;
+}
+
+.caption {
+  color:var(--muted);
+
+  text-align:center;
+
+  font-size:0.82rem;
+
+  padding:0.9rem 0.5rem 0.2rem;
+}
+
+/* =========================
+   QUICK OVERVIEW
+========================= */
+
+.overview {
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+  gap:1rem;
+
+  margin-top:1.5rem;
+}
+
+.overview-item {
+  padding:1.2rem;
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:0.9rem;
+}
+
+.overview-item span {
+  display:block;
+
+  color:var(--primary);
+
+  font-size:0.78rem;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  margin-bottom:0.3rem;
+}
+
+.overview-item p {
+  color:var(--muted);
+
+  font-size:0.9rem;
+}
+
+/* =========================
+   TEAM PREVIEW
+========================= */
+
+.team {
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+  gap:1rem;
+
+  margin-top:1.5rem;
+}
+
+.person {
+  background:var(--surface);
+
+  border:1px solid var(--border);
+
+  border-radius:1rem;
+
+  padding:1.2rem;
+
+  text-align:center;
+}
+
+.person img {
+  width:120px;
+  height:120px;
+
+  object-fit:cover;
+
+  border-radius:50%;
+
+  border:3px solid var(--primary);
+
+  margin-bottom:0.8rem;
+}
+
+.person h3 {
+  margin-bottom:0.2rem;
+}
+
+.person p {
+  color:var(--muted);
+
+  font-size:0.82rem;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  text-align:center;
+
+  padding:1.5rem;
+
+  color:var(--muted);
+
+  font-size:0.82rem;
+
+  border-top:1px solid var(--border);
+
+  margin-top:3rem;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width:700px) {
+
+  nav {
+    justify-content:center;
+  }
+
+  .nav-links {
+    order:3;
+    width:100%;
+  }
+
+  .container {
+    padding:
+      2.5rem 1rem;
+  }
+
+  h1 {
+    font-size:2.3rem;
+  }
+
+  .sub {
+    font-size:0.95rem;
+  }
+
+  .btn {
+    width:100%;
+    text-align:center;
+  }
+
+}
+
 </style>
 </head>
+
 <body>
 
+<!-- =========================
+     NAVIGATION
+========================= -->
+
 <nav>
-  <a href="index.html" class="brand">VEXO</a>
-  <div class="nav-links">
-    <a href="index.html" class="active" data-i18n="n1">Home</a>
-    <a href="problem.html" data-i18n="n2">Problem & Solutions</a>
-    <a href="prototype.html" data-i18n="n3">Prototype & Mechanism</a>
-    <a href="results.html" data-i18n="n4">Lab Results</a>
-    <a href="business.html" data-i18n="n5">Business & Team</a>
-  </div>
-  <div class="tools">
-    <button class="t-btn" onclick="speak()">🔊 Voice</button>
-    <button class="t-btn" onclick="toggleLang()" id="lang-btn">عربي</button>
-    <button class="t-btn" onclick="toggleTheme()" id="theme-btn">☀️ Light</button>
-  </div>
-</nav>
 
-<div class="container" style="text-align:center;">
-  <span class="pill" data-i18n="hp">🏆 ISEF Environmental Engineering • Qena, Egypt</span>
-  <h1><span data-i18n="ht1">Engineering Waste.</span><br><span class="grad" data-i18n="ht2">Rethinking Clean Air.</span></h1>
-  <p class="sub" data-i18n="hs">
-    VEXO transforms whole groundwater-treatment sludge from Qena into a cost-effective, multifunctional catalytic filter for gas-phase ozone (O₃) removal—achieving &gt;85% efficiency without expensive chemical extraction.
-  </p>
-  <div class="btns">
-    <a href="prototype.html" class="btn btn-p" data-i18n="b1">Explore Prototype & Mechanism →</a>
-    <a href="problem.html" class="btn btn-o" data-i18n="b2">View Problem & Market Gap</a>
-  </div>
+<a href="index.html" class="brand">
+VEXO
+</a>
 
-  <div class="grid-4" style="text-align:start;">
-    <div class="card card-hi">
-      <div style="font-size:1.5rem; margin-bottom:0.4rem;">🎯 &gt;85%</div>
-      <h3 data-i18n="k1_t">Target O₃ Removal</h3>
-      <p style="font-size:0.84rem; color:var(--muted);" data-i18n="k1_d">Catalytic decomposition of toxic ozone into clean oxygen.</p>
-    </div>
-    <div class="card">
-      <div style="font-size:1.5rem; margin-bottom:0.4rem;">🧪 11.6%</div>
-      <h3 data-i18n="k2_t">Natural Active Oxides</h3>
-      <p style="font-size:0.84rem; color:var(--muted);" data-i18n="k2_d">Fe₂O₃ (10.61%) + MnO₂ (1.01%) verified via XRF in Qena sludge.</p>
-    </div>
-    <div class="card">
-      <div style="font-size:1.5rem; margin-bottom:0.4rem;">♻️ 100%</div>
-      <h3 data-i18n="k3_t">Whole-Matrix Retention</h3>
-      <p style="font-size:0.84rem; color:var(--muted);" data-i18n="k3_d">Zero acid leaching or expensive synthetic dopants required.</p>
-    </div>
-    <div class="card">
-      <div style="font-size:1.5rem; margin-bottom:0.4rem;">💰 -92%</div>
-      <h3 data-i18n="k4_t">Production Cost</h3>
-      <p style="font-size:0.84rem; color:var(--muted);" data-i18n="k4_d">~$15 modular unit vs $200+ commercial activated carbon filters.</p>
-    </div>
-  </div>
+<div class="nav-links">
+
+<a href="index.html"
+class="active"
+data-i18n="n1">
+Home
+</a>
+
+<a href="problem.html"
+data-i18n="n2">
+Problem & Solutions
+</a>
+
+<a href="prototype.html"
+data-i18n="n3">
+Prototype & Mechanism
+</a>
+
+<a href="results.html"
+data-i18n="n4">
+Lab Results
+</a>
+
+<a href="business.html"
+data-i18n="n5">
+Business & Team
+</a>
+
 </div>
 
-<footer><strong>VEXO</strong> — Engineered Groundwater-Treatment Sludge for Clean Air • Qena, Egypt</footer>
+<div class="tools">
+
+<button
+class="t-btn"
+onclick="speak()">
+🔊 Voice
+</button>
+
+<button
+class="t-btn"
+onclick="toggleLang()"
+id="lang-btn">
+عربي
+</button>
+
+<button
+class="t-btn"
+onclick="toggleTheme()"
+id="theme-btn">
+☀️ Light
+</button>
+
+</div>
+
+</nav>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="container">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<span class="pill"
+data-i18n="hp">
+🏆 ISEF Environmental Engineering • Qena, Egypt
+</span>
+
+<h1>
+
+<span data-i18n="ht1">
+Engineering Waste.
+</span>
+
+<br>
+
+<span class="grad"
+data-i18n="ht2">
+Rethinking Clean Air.
+</span>
+
+</h1>
+
+
+<p class="sub"
+data-i18n="hs">
+
+VEXO transforms whole groundwater-treatment sludge
+from Qena into a cost-effective, multifunctional
+catalytic filter for gas-phase ozone (O₃) removal—
+achieving &gt;85% efficiency without expensive
+chemical extraction.
+
+</p>
+
+
+<div class="btns">
+
+<a
+href="prototype.html"
+class="btn btn-p"
+data-i18n="b1">
+
+Explore Prototype & Mechanism →
+
+</a>
+
+<a
+href="problem.html"
+class="btn btn-o"
+data-i18n="b2">
+
+View Problem & Market Gap
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     KEY NUMBERS
+========================= -->
+
+<section>
+
+<div class="grid-4">
+
+<div class="card card-hi">
+
+<div class="stat">
+&gt;85%
+</div>
+
+<h3 data-i18n="k1_t">
+Target O₃ Removal
+</h3>
+
+<p data-i18n="k1_d">
+Catalytic decomposition of toxic ozone
+into clean oxygen.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="stat">
+11.6%
+</div>
+
+<h3 data-i18n="k2_t">
+Natural Active Oxides
+</h3>
+
+<p data-i18n="k2_d">
+Fe₂O₃ (10.61%) + MnO₂ (1.01%)
+verified via XRF in Qena sludge.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="stat">
+100%
+</div>
+
+<h3 data-i18n="k3_t">
+Whole-Matrix Retention
+</h3>
+
+<p data-i18n="k3_d">
+Zero acid leaching or expensive
+synthetic dopants required.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="stat">
+-92%
+</div>
+
+<h3 data-i18n="k4_t">
+Production Cost
+</h3>
+
+<p data-i18n="k4_d">
+~$15 modular unit vs $200+
+commercial activated carbon filters.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     PROTOTYPE IMAGE
+========================= -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2 data-i18n="prototype_title">
+VEXO Prototype
+</h2>
+
+<p data-i18n="prototype_desc">
+A modular catalytic reactor designed for
+gas-phase ozone removal.
+</p>
+
+</div>
+
+
+<div class="image-card">
+
+<img
+src="prototype.jpg"
+alt="VEXO Catalytic Reactor Prototype">
+
+<p class="caption"
+data-i18n="prototype_caption">
+
+VEXO catalytic reactor concept showing the
+sludge catalytic bed, ozone sensors,
+airflow path, support mesh, and fan system.
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     PROJECT OVERVIEW
+========================= -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2 data-i18n="overview_title">
+What is VEXO?
+</h2>
+
+<p data-i18n="overview_desc">
+From water-treatment waste to a potential
+air-pollution control material.
+</p>
+
+</div>
+
+
+<div class="overview">
+
+<div class="overview-item">
+
+<span data-i18n="ov1_title">
+THE WASTE
+</span>
+
+<p data-i18n="ov1_desc">
+Groundwater-treatment sludge generated
+as a waste stream in Qena.
+</p>
+
+</div>
+
+
+<div class="overview-item">
+
+<span data-i18n="ov2_title">
+THE PROBLEM
+</span>
+
+<p data-i18n="ov2_desc">
+Ground-level ozone is a harmful air
+pollutant that requires effective removal.
+</p>
+
+</div>
+
+
+<div class="overview-item">
+
+<span data-i18n="ov3_title">
+THE APPROACH
+</span>
+
+<p data-i18n="ov3_desc">
+Use the whole sludge matrix as a
+functional filter and catalytic material.
+</p>
+
+</div>
+
+
+<div class="overview-item">
+
+<span data-i18n="ov4_title">
+THE GOAL
+</span>
+
+<p data-i18n="ov4_desc">
+Develop a lower-cost and locally sourced
+alternative for ozone-removal systems.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     MECHANISM PREVIEW
+========================= -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2 data-i18n="mechanism_title">
+How VEXO Works
+</h2>
+
+<p data-i18n="mechanism_desc">
+The prototype combines airflow control,
+sensing, and a sludge-based catalytic bed.
+</p>
+
+</div>
+
+
+<div class="image-card">
+
+<img
+src="mechanism.png"
+alt="VEXO mechanism diagram">
+
+<p class="caption"
+data-i18n="mechanism_caption">
+
+VEXO mechanism and airflow pathway.
+Detailed experimental mechanism and
+validation are presented in the Prototype
+& Mechanism section.
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     RESEARCH PATH
+========================= -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2 data-i18n="research_title">
+Research & Validation
+</h2>
+
+<p data-i18n="research_desc">
+The website will document the progression
+from material characterization to prototype testing.
+</p>
+
+</div>
+
+
+<div class="grid-4">
+
+<div class="card">
+
+<div class="stat">
+01
+</div>
+
+<h3 data-i18n="r1_title">
+Material Characterization
+</h3>
+
+<p data-i18n="r1_desc">
+Chemical and structural characterization
+of the treatment sludge.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="stat">
+02
+</div>
+
+<h3 data-i18n="r2_title">
+Catalytic Bed
+</h3>
+
+<p data-i18n="r2_desc">
+Development and preparation of the
+sludge-based catalytic bed.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="stat">
+03
+</div>
+
+<h3 data-i18n="r3_title">
+Ozone Testing
+</h3>
+
+<p data-i18n="r3_desc">
+Measurement of inlet and outlet ozone
+concentrations under controlled conditions.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="stat">
+04
+</div>
+
+<h3 data-i18n="r4_title">
+Performance Analysis
+</h3>
+
+<p data-i18n="r4_desc">
+Analysis of removal efficiency and
+operating conditions.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     TEAM PREVIEW
+========================= -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2 data-i18n="team_title">
+The Team
+</h2>
+
+<p data-i18n="team_desc">
+The people behind the VEXO project.
+</p>
+
+</div>
+
+
+<div class="team">
+
+<div class="person">
+
+<img
+src="sara.jpg"
+alt="Sara">
+
+<h3>
+Sara Gomaa
+</h3>
+
+<p data-i18n="sara_role">
+Founder & Project Lead
+</p>
+
+</div>
+
+
+<div class="person">
+
+<img
+src="nour.jpg"
+alt="Nour">
+
+<h3>
+Nour
+</h3>
+
+<p data-i18n="nour_role">
+Research & Poster Team Member
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section
+class="section"
+style="text-align:center;">
+
+<div class="card card-hi">
+
+<h2 data-i18n="cta_title">
+Explore the VEXO Research
+</h2>
+
+<p
+style="max-width:650px;margin:0.6rem auto 1.3rem;color:var(--muted);"
+data-i18n="cta_desc">
+
+Explore the problem, current solutions,
+VEXO's prototype, experimental results,
+business feasibility, and future work.
+
+</p>
+
+<div class="btns" style="margin-bottom:0;">
+
+<a
+href="problem.html"
+class="btn btn-p"
+data-i18n="cta_problem">
+
+Explore the Problem
+
+</a>
+
+<a
+href="results.html"
+class="btn btn-o"
+data-i18n="cta_results">
+
+View Research Results
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<strong>VEXO</strong>
+
+<span data-i18n="footer">
+ — Engineered Groundwater-Treatment Sludge for Clean Air • Qena, Egypt
+</span>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
 <script>
-let lang='en';
-function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);document.getElementById('theme-btn').innerText=n==='dark'?'☀️ Light':'🌙 Dark'}
-function speak(){if('speechSynthesis' in window){window.speechSynthesis.cancel();window.speechSynthesis.speak(new SpeechSynthesisUtterance("Welcome to VEXO. Engineering whole groundwater treatment sludge from Qena into a low cost catalytic filter for clean air."))}}
-const ar={n1:"الرئيسية",n2:"المشكلة والحلول",n3:"البروتوتايب والميكانيزم",n4:"نتائج التحاليل",n5:"الجدوى والفريق",hp:"🏆 الهندسة البيئية لمعرض آيسف • قنا، مصر",ht1:"إعادة هندسة المخلفات.",ht2:"لرؤية جديدة لهواء نقي.",hs:"يحول مشروع VEXO حمأة معالجة المياه الجوفية في قنا بتركيبتها الكاملة إلى فلتر تحفيزي منخفض التكلفة لإزالة غاز الأوزون بكفاءة تتخطى 85% بدون استخلاص كيميائي مكلف.",b1:"استكشف البروتوتايب والميكانيزم ←",b2:"عرض المشكلة وتحليل السوق",k1_t:"كفاءة إزالة مستهدفة",k1_d:"تكسير تحفيزي لغاز الأوزون السام وتحويله لأكسجين نقي.",k2_t:"أكاسيد نشطة طبيعية",k2_d:"حديد (10.61%) ومنجنيز (1.01%) مثبتة بتحليل XRF في حمأة قنا.",k3_t:"استغلال التركيبة الكاملة",k3_d:"بدون استخلاص بالأحماض أو إضافات صناعية باهظة.",k4_t:"توفير في التكلفة",k4_d:"تكلفة 15 دولار للوحدة مقارنة بأكثر من 200 دولار للفلاتر التجارية."};
-const en={};document.querySelectorAll('[data-i18n]').forEach(e=>en[e.getAttribute('data-i18n')]=e.innerText);
-function toggleLang(){lang=lang==='en'?'ar':'en';document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';document.getElementById('lang-btn').innerText=lang==='en'?'عربي':'EN';const d=lang==='ar'?ar:en;document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(d[k])e.innerText=d[k]})}
-<script>
-const ar={n1:"الرئيسية",n2:"المشكلة والحلول",n3:"البروتوتايب والميكانيزم",n4:"نتائج التحاليل",n5:"الجدوى والفريق",hp:"🏆 الهندسة البيئية لمعرض آيسف • قنا، مصر",ht1:"إعادة هندسة المخلفات.",ht2:"لرؤية جديدة لهواء نقي.",hs:"يحول مشروع VEXO حمأة معالجة المياه الجوفية في قنا بتركيبتها الكاملة إلى فلتر تحفيزي منخفض التكلفة لإزالة غاز الأوزون بكفاءة تتخطى 85% بدون استخلاص كيميائي مكلف.",b1:"استكشف البروتوتايب والميكانيزم ←",b2:"عرض المشكلة وتحليل السوق",k1_t:"كفاءة إزالة مستهدفة",k1_d:"تكسير تحفيزي لغاز الأوزون السام وتحويله لأكسجين نقي.",k2_t:"أكاسيد نشطة طبيعية",k2_d:"حديد (10.61%) ومنجنيز (1.01%) مثبتة بتحليل XRF في حمأة قنا.",k3_t:"استغلال التركيبة الكاملة",k3_d:"بدون استخلاص بالأحماض أو إضافات صناعية باهظة.",k4_t:"توفير في التكلفة",k4_d:"تكلفة 15 دولار للوحدة مقارنة بأكثر من 200 دولار للفلاتر التجارية."};
-const en={};document.querySelectorAll('[data-i18n]').forEach(e=>en[e.getAttribute('data-i18n')]=e.innerText);
-let lang=localStorage.getItem('vexo_lang')||'en';
-let theme=localStorage.getItem('vexo_theme')||'dark';
-function applyState(){
-  document.documentElement.setAttribute('data-theme',theme);
-  document.getElementById('theme-btn').innerText=theme==='dark'?'☀️ Light':'🌙 Dark';
-  document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
-  document.getElementById('lang-btn').innerText=lang==='en'?'عربي':'EN';
-  const d=lang==='ar'?ar:en;
-  document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(d[k])e.innerText=d[k]});
+
+/* =========================
+   ENGLISH TEXT
+========================= */
+
+const en = {
+
+n1:"Home",
+n2:"Problem & Solutions",
+n3:"Prototype & Mechanism",
+n4:"Lab Results",
+n5:"Business & Team",
+
+hp:"🏆 ISEF Environmental Engineering • Qena, Egypt",
+
+ht1:"Engineering Waste.",
+ht2:"Rethinking Clean Air.",
+
+hs:
+"VEXO transforms whole groundwater-treatment sludge from Qena into a cost-effective, multifunctional catalytic filter for gas-phase ozone (O₃) removal—achieving >85% efficiency without expensive chemical extraction.",
+
+b1:"Explore Prototype & Mechanism →",
+b2:"View Problem & Market Gap",
+
+k1_t:"Target O₃ Removal",
+k1_d:
+"Catalytic decomposition of toxic ozone into clean oxygen.",
+
+k2_t:"Natural Active Oxides",
+k2_d:
+"Fe₂O₃ (10.61%) + MnO₂ (1.01%) verified via XRF in Qena sludge.",
+
+k3_t:"Whole-Matrix Retention",
+k3_d:
+"Zero acid leaching or expensive synthetic dopants required.",
+
+k4_t:"Production Cost",
+k4_d:
+"~$15 modular unit vs $200+ commercial activated carbon filters.",
+
+prototype_title:"VEXO Prototype",
+
+prototype_desc:
+"A modular catalytic reactor designed for gas-phase ozone removal.",
+
+prototype_caption:
+"VEXO catalytic reactor concept showing the sludge catalytic bed, ozone sensors, airflow path, support mesh, and fan system.",
+
+overview_title:"What is VEXO?",
+
+overview_desc:
+"From water-treatment waste to a potential air-pollution control material.",
+
+ov1_title:"THE WASTE",
+ov1_desc:
+"Groundwater-treatment sludge generated as a waste stream in Qena.",
+
+ov2_title:"THE PROBLEM",
+ov2_desc:
+"Ground-level ozone is a harmful air pollutant that requires effective removal.",
+
+ov3_title:"THE APPROACH",
+ov3_desc:
+"Use the whole sludge matrix as a functional filter and catalytic material.",
+
+ov4_title:"THE GOAL",
+ov4_desc:
+"Develop a lower-cost and locally sourced alternative for ozone-removal systems.",
+
+mechanism_title:"How VEXO Works",
+
+mechanism_desc:
+"The prototype combines airflow control, sensing, and a sludge-based catalytic bed.",
+
+mechanism_caption:
+"VEXO mechanism and airflow pathway. Detailed experimental mechanism and validation are presented in the Prototype & Mechanism section.",
+
+research_title:"Research & Validation",
+
+research_desc:
+"The website will document the progression from material characterization to prototype testing.",
+
+r1_title:"Material Characterization",
+r1_desc:
+"Chemical and structural characterization of the treatment sludge.",
+
+r2_title:"Catalytic Bed",
+r2_desc:
+"Development and preparation of the sludge-based catalytic bed.",
+
+r3_title:"Ozone Testing",
+r3_desc:
+"Measurement of inlet and outlet ozone concentrations under controlled conditions.",
+
+r4_title:"Performance Analysis",
+r4_desc:
+"Analysis of removal efficiency and operating conditions.",
+
+team_title:"The Team",
+
+team_desc:
+"The people behind the VEXO project.",
+
+sara_role:
+"Founder & Project Lead",
+
+nour_role:
+"Research & Poster Team Member",
+
+cta_title:
+"Explore the VEXO Research",
+
+cta_desc:
+"Explore the problem, current solutions, VEXO's prototype, experimental results, business feasibility, and future work.",
+
+cta_problem:
+"Explore the Problem",
+
+cta_results:
+"View Research Results",
+
+footer:
+" — Engineered Groundwater-Treatment Sludge for Clean Air • Qena, Egypt"
+
+};
+
+
+/* =========================
+   ARABIC TEXT
+========================= */
+
+const ar = {
+
+n1:"الرئيسية",
+n2:"المشكلة والحلول",
+n3:"البروتوتايب والميكانيزم",
+n4:"نتائج التحاليل",
+n5:"الجدوى والفريق",
+
+hp:
+"🏆 الهندسة البيئية لمعرض آيسف • قنا، مصر",
+
+ht1:
+"إعادة هندسة المخلفات.",
+
+ht2:
+"لرؤية جديدة لهواء نقي.",
+
+hs:
+"يحول مشروع VEXO حمأة معالجة المياه الجوفية في قنا بتركيبتها الكاملة إلى فلتر تحفيزي منخفض التكلفة لإزالة غاز الأوزون (O₃) في الطور الغازي.",
+
+b1:
+"استكشف البروتوتايب والميكانيزم ←",
+
+b2:
+"عرض المشكلة وتحليل السوق",
+
+k1_t:
+"كفاءة إزالة مستهدفة",
+
+k1_d:
+"تكسير تحفيزي لغاز الأوزون وتحويله إلى أكسجين.",
+
+k2_t:
+"أكاسيد نشطة طبيعية",
+
+k2_d:
+"Fe₂O₃ بنسبة 10.61% وMnO₂ بنسبة 1.01% وفقًا لتحليل XRF لحمأة قنا.",
+
+k3_t:
+"استغلال التركيبة الكاملة",
+
+k3_d:
+"استخدام الحمأة بتركيبتها الكاملة بدون استخلاص حمضي مكلف.",
+
+k4_t:
+"توفير في التكلفة",
+
+k4_d:
+"تقدير مبدئي يقارب 15 دولارًا للوحدة مقارنة بالحلول التجارية الأعلى تكلفة.",
+
+prototype_title:
+"بروتوتايب VEXO",
+
+prototype_desc:
+"مفاعل تحفيزي مصمم لإزالة الأوزون في الطور الغازي.",
+
+prototype_caption:
+"تصور لمفاعل VEXO يوضح طبقة الحمأة التحفيزية، حساسات الأوزون، مسار الهواء، الشبكات الداعمة، والمروحة.",
+
+overview_title:
+"ما هو VEXO؟",
+
+overview_desc:
+"تحويل مخلفات معالجة المياه إلى مادة محتملة للتحكم في تلوث الهواء.",
+
+ov1_title:
+"المخلفات",
+
+ov1_desc:
+"حمأة ناتجة عن معالجة المياه الجوفية ويتم التعامل معها كمخلف في قنا.",
+
+ov2_title:
+"المشكلة",
+
+ov2_desc:
+"الأوزون الأرضي أحد ملوثات الهواء الضارة ويتطلب حلولًا فعالة للإزالة.",
+
+ov3_title:
+"الفكرة",
+
+ov3_desc:
+"استخدام التركيبة الكاملة للحمأة كوسط ترشيح ومادة تحفيزية.",
+
+ov4_title:
+"الهدف",
+
+ov4_desc:
+"تطوير بديل منخفض التكلفة يعتمد على مصدر محلي لإزالة الأوزون.",
+
+mechanism_title:
+"كيف يعمل VEXO؟",
+
+mechanism_desc:
+"يجمع البروتوتايب بين التحكم في تدفق الهواء والقياس وطبقة تحفيزية قائمة على الحمأة.",
+
+mechanism_caption:
+"الميكانيزم ومسار تدفق الهواء في VEXO. سيتم عرض التفاصيل التجريبية والتحقق من الميكانيزم في صفحة البروتوتايب والميكانيزم.",
+
+research_title:
+"البحث والتحقق",
+
+research_desc:
+"يوثق الموقع مراحل البحث بداية من توصيف المادة وحتى اختبار البروتوتايب.",
+
+r1_title:
+"توصيف المادة",
+
+r1_desc:
+"توصيف كيميائي وتركيبي لحمأة معالجة المياه.",
+
+r2_title:
+"الطبقة التحفيزية",
+
+r2_desc:
+"تجهيز وتطوير الطبقة التحفيزية القائمة على الحمأة.",
+
+r3_title:
+"اختبارات الأوزون",
+
+r3_desc:
+"قياس تركيز الأوزون عند المدخل والمخرج تحت ظروف اختبار محددة.",
+
+r4_title:
+"تحليل الأداء",
+
+r4_desc:
+"تحليل كفاءة الإزالة وتأثير ظروف التشغيل.",
+
+team_title:
+"الفريق",
+
+team_desc:
+"الأشخاص وراء مشروع VEXO.",
+
+sara_role:
+"صاحبة الفكرة وقائدة المشروع",
+
+nour_role:
+"عضوة في البحث وتصميم البوستر",
+
+cta_title:
+"استكشف بحث VEXO",
+
+cta_desc:
+"استكشف المشكلة والحلول الحالية، البروتوتايب، النتائج التجريبية، الجدوى الاقتصادية، وخطة العمل المستقبلية.",
+
+cta_problem:
+"استكشف المشكلة",
+
+cta_results:
+"عرض نتائج البحث",
+
+footer:
+" — حمأة معالجة المياه الجوفية لهواء أنظف • قنا، مصر"
+
+};
+
+
+/* =========================
+   STATE
+========================= */
+
+let lang =
+localStorage.getItem("vexo_lang") || "en";
+
+let theme =
+localStorage.getItem("vexo_theme") || "dark";
+
+
+/* =========================
+   APPLY STATE
+========================= */
+
+function applyState() {
+
+  document.documentElement
+    .setAttribute("data-theme", theme);
+
+  document.documentElement.lang = lang;
+
+  document.documentElement.dir =
+    lang === "ar" ? "rtl" : "ltr";
+
+
+  document.getElementById("theme-btn").innerText =
+    theme === "dark"
+      ? "☀️ Light"
+      : "🌙 Dark";
+
+
+  document.getElementById("lang-btn").innerText =
+    lang === "en"
+      ? "عربي"
+      : "EN";
+
+
+  const dictionary =
+    lang === "ar"
+      ? ar
+      : en;
+
+
+  document
+    .querySelectorAll("[data-i18n]")
+    .forEach(element => {
+
+      const key =
+        element.getAttribute("data-i18n");
+
+      if (dictionary[key]) {
+
+        element.innerText =
+          dictionary[key];
+
+      }
+
+    });
+
 }
-function toggleTheme(){theme=theme==='dark'?'light':'dark';localStorage.setItem('vexo_theme',theme);applyState()}
-function toggleLang(){lang=lang==='en'?'ar':'en';localStorage.setItem('vexo_lang',lang);applyState()}
-function speak(){if('speechSynthesis' in window){window.speechSynthesis.cancel();window.speechSynthesis.speak(new SpeechSynthesisUtterance("Welcome to VEXO. Engineering whole groundwater treatment sludge from Qena into a low cost catalytic filter for clean air."))}}
+
+
+/* =========================
+   THEME
+========================= */
+
+function toggleTheme() {
+
+  theme =
+    theme === "dark"
+      ? "light"
+      : "dark";
+
+  localStorage.setItem(
+    "vexo_theme",
+    theme
+  );
+
+  applyState();
+
+}
+
+
+/* =========================
+   LANGUAGE
+========================= */
+
+function toggleLang() {
+
+  lang =
+    lang === "en"
+      ? "ar"
+      : "en";
+
+  localStorage.setItem(
+    "vexo_lang",
+    lang
+  );
+
+  applyState();
+
+}
+
+
+/* =========================
+   VOICE
+========================= */
+
+function speak() {
+
+  if (!("speechSynthesis" in window)) {
+
+    alert("Voice reading is not supported in this browser.");
+
+    return;
+
+  }
+
+
+  window.speechSynthesis.cancel();
+
+
+  const text =
+    lang === "ar"
+
+      ? "مرحبًا بكم في مشروع فيكسو، الذي يهدف إلى إعادة استخدام حمأة معالجة المياه الجوفية كمادة ترشيح وتحفيز لإزالة الأوزون من الهواء."
+
+      : "Welcome to VEXO, a project that explores the use of groundwater treatment sludge as a filtration and catalytic material for ozone removal from air.";
+
+
+  const utterance =
+    new SpeechSynthesisUtterance(text);
+
+
+  utterance.lang =
+    lang === "ar"
+      ? "ar-EG"
+      : "en-US";
+
+
+  window.speechSynthesis.speak(
+    utterance
+  );
+
+}
+
+
+/* =========================
+   START
+========================= */
+
 applyState();
+
 </script>
-</body>
-</html>
 
 </body>
 </html>
