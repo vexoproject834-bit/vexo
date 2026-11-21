@@ -150,3 +150,126 @@
     <h2 data-i18n="sci_title">Keep the matrix. Don't isolate one component.</h2>
     <p class="sub" data-i18n="sci_sub">Instead of energy-intensive chemical extraction, VEXO utilizes the natural synergy of iron, manganese, and aluminosilicates present in Qena sludge.</p>
 
+        <div class="grid-2" style="margin-bottom:2.5rem;">
+      <div class="card">
+        <span style="font-size:0.75rem; color:#f43f5e; font-weight:800;" data-i18n="conv_tag">CONVENTIONAL PATHWAY • HIGH COST</span>
+        <h3 style="margin-top:0.3rem;" data-i18n="conv_h">Single-Component Extraction</h3>
+        <ul class="list">
+          <li><span style="color:#f43f5e;">✕</span> <span data-i18n="conv_1">Chemically separate one target metal or mineral.</span></li>
+          <li><span style="color:#f43f5e;">✕</span> <span data-i18n="conv_2">High energy use & secondary chemical waste.</span></li>
+          <li><span style="color:#f43f5e;">✕</span> <span data-i18n="conv_3">Requires expensive synthetic dopants (e.g., CeO₂).</span></li>
+        </ul>
+      </div>
+      <div class="card card-hi">
+        <span style="font-size:0.75rem; color:var(--primary); font-weight:800;" data-i18n="vexo_tag">VEXO INNOVATION • CIRCULAR ECONOMY</span>
+        <h3 style="margin-top:0.3rem;" data-i18n="vexo_h">Whole-Matrix Valorization</h3>
+        <ul class="list">
+          <li><span style="color:var(--primary);">✓</span> <span data-i18n="vexo_1">Retain native Qena sludge matrix intact.</span></li>
+          <li><span style="color:var(--primary);">✓</span> <span data-i18n="vexo_2">Simple physical washing & granulation engineering.</span></li>
+          <li><span style="color:var(--primary);">✓</span> <span data-i18n="vexo_3">Synergistic Fe₂O₃–MnO₂–SiO₂ active interfaces.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 data-i18n="meth_h">Controlled Experimental Groups</h3>
+    <div class="grid-4" style="margin-top:1rem;">
+      <div class="card"><strong style="color:var(--muted);">01. Blank</strong><p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;" data-i18n="m1">Empty reactor baseline for natural O₃ decay.</p></div>
+      <div class="card"><strong style="color:var(--sec);">02. Untreated</strong><p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;" data-i18n="m2">Raw dried Qena sludge baseline activity.</p></div>
+      <div class="card card-hi"><strong style="color:var(--primary);">03. Engineered</strong><p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;" data-i18n="m3">Washed & granulated sludge for low pressure drop.</p></div>
+      <div class="card"><strong style="color:#f59e0b;">04. Reference</strong><p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;" data-i18n="m4">Commercial MnO₂ / Activated Carbon benchmark.</p></div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: LAB MATRIX -->
+  <div id="page-matrix" class="page">
+    <span class="tag" data-i18n="mat_tag">02 — Preliminary Lab Results</span>
+    <h2 data-i18n="mat_title">Qena Sludge Oxide Composition (XRF/XRD)</h2>
+    <p class="sub" data-i18n="mat_sub">Click any oxide component below to inspect its functional role in ozone decomposition.</p>
+
+    <div class="grid-2" style="align-items:center;">
+      <div class="card" id="ox-bars"></div>
+      <div class="card card-hi">
+        <span class="tag" style="color:var(--sec);" data-i18n="role_lbl">Component Catalytic Role</span>
+        <h3 id="ox-t" style="font-size:1.35rem;"></h3>
+        <p id="ox-d" style="color:var(--muted);"></p>
+        <div style="margin-top:1.5rem; padding:0.8rem; border-radius:0.75rem; background:var(--sim-bg); font-size:0.82rem; color:var(--muted);" data-i18n="status_note">
+          Current Status: Chemical & XRD characterization completed. Washing optimization & ozone reactor testing are underway.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 4: PROTOTYPE & SIMULATOR -->
+  <div id="page-prototype" class="page">
+    <span class="tag" data-i18n="pro_tag">03 — Reactor & Validation</span>
+    <h2 data-i18n="pro_title">Interactive Fixed-Bed Reactor</h2>
+    <p class="sub" data-i18n="pro_sub">Click on any stage of the vertical reactor to inspect its engineering design.</p>
+
+    <div class="grid-2" style="align-items:center; margin-bottom:2.5rem;">
+      <div id="reactor-btns"></div>
+      <div class="card">
+        <span class="pill" id="st-b"></span>
+        <h3 id="st-t" style="font-size:1.35rem;"></h3>
+        <p id="st-d" style="color:var(--muted);"></p>
+      </div>
+    </div>
+
+    <div class="card card-hi">
+      <h3 data-i18n="sim_h">Live Ozone Removal Efficiency Simulator</h3>
+      <p style="font-size:0.88rem; color:var(--muted); margin-bottom:1.5rem;">η (%) = [(C_in − C_out) / C_in] × 100</p>
+      <div class="grid-2" style="align-items:center;">
+        <div>
+          <div style="display:flex; justify-content:space-between; font-size:0.9rem;"><span data-i18n="cin_lbl">Inlet Ozone (C_in):</span><strong style="color:var(--sec);"><span id="cin-t">100</span> ppm</strong></div>
+          <input type="range" id="cin" min="20" max="200" value="100" oninput="sim()">
+          <div style="display:flex; justify-content:space-between; font-size:0.9rem;"><span data-i18n="cout_lbl">Outlet Ozone (C_out):</span><strong style="color:var(--primary);"><span id="cout-t">12</span> ppm</strong></div>
+          <input type="range" id="cout" min="0" max="100" value="12" oninput="sim()">
+        </div>
+        <div class="sim-box">
+          <div style="font-size:0.8rem; color:var(--muted);" data-i18n="eff_lbl">Removal Efficiency</div>
+          <div class="big" id="eff-t">88.0%</div>
+          <div id="eff-b" style="font-weight:700; font-size:0.85rem;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 5: TEAM & REFS -->
+  <div id="page-team" class="page">
+    <span class="tag" data-i18n="team_tag">04 — Researchers & Literature</span>
+    <h2 data-i18n="team_title">Meet the VEXO Team</h2>
+    <p class="sub" data-i18n="team_sub">Student Researchers • Qena Governorate, Egypt</p>
+
+    <div class="grid-2" style="margin-bottom:2.5rem;">
+      <div class="card t-card">
+        <img src="nour.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://w3.org width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%2310b981%22/><text x=%2250%%22 y=%2255%%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2234%22 fill=%22white%22 font-family=%22sans-serif%22>NS</text></svg>'" alt="Nour Al-Hoda Saad" class="avatar">
+        <div>
+          <h3 style="margin-bottom:0.2rem;" data-i18n="n_name">Nour Al-Hoda Saad</h3>
+          <div style="color:var(--primary); font-size:0.78rem; font-weight:800; margin-bottom:0.4rem;" data-i18n="role_co">CO-LEAD RESEARCHER</div>
+          <p style="color:var(--muted); font-size:0.85rem;" data-i18n="n_bio">Sludge sampling, XRD/XRF chemical characterization, and catalytic matrix optimization.</p>
+        </div>
+      </div>
+
+      <div class="card t-card">
+        <img src="sara.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://w3.org width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%2338bdf8%22/><text x=%2250%%22 y=%2255%%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2234%22 fill=%22white%22 font-family=%22sans-serif%22>SG</text></svg>'" alt="Sara Gomaa" class="avatar">
+        <div>
+          <h3 style="margin-bottom:0.2rem;" data-i18n="s_name">Sara Gomaa</h3>
+          <div style="color:var(--sec); font-size:0.78rem; font-weight:800; margin-bottom:0.4rem;" data-i18n="role_co">CO-LEAD RESEARCHER</div>
+          <p style="color:var(--muted); font-size:0.85rem;" data-i18n="s_bio">Fixed-bed reactor engineering, airflow dynamics, and humidity resistance testing.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 data-i18n="ref_h">Key Scientific References</h3>
+      <ol style="padding-inline-start:1.25rem; color:var(--muted); font-size:0.85rem; margin-top:0.8rem;">
+        <li style="margin-bottom:0.5rem;">Dai, W., et al. (2023). Exceptional ozone decomposition over δ-MnO₂/AC under an entire humidity environment. <em>Environmental Science & Technology</em>, 57(46), 17727–17736.</li>
+        <li style="margin-bottom:0.5rem;">Ye, L., et al. (2024). One-step synthesis of sludge-derived MnOx catalysts for highly efficient removal of gaseous ozone. <em>Applied Catalysis B: Environment and Energy</em>, 345, 123696.</li>
+        <li>Jia, J., Yang, W., & Zhang, P. (2017). Facile synthesis of Fe-modified manganese oxide with high content of oxygen vacancies for airborne ozone destruction. <em>Applied Catalysis A</em>, 546, 79–86.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<footer data-i18n="footer">VEXO Research Project • Engineered Groundwater-Treatment Sludge for Clean Air • Qena, Egypt</footer>
+
+
