@@ -124,13 +124,25 @@
 <footer><strong>VEXO</strong> — Engineered Groundwater-Treatment Sludge for Clean Air • Qena, Egypt</footer>
 
 <script>
-const ar={n1:"الرئيسية",n2:"المشكلة والحلول",n3:"البروتوتايب والميكانيزم",n4:"نتائج التحاليل",n5:"الجدوى والفريق",ptag:"01 • التحدي البيئي المزدوج",ph:"تعريف المشكلة: تلوث الأوزون ونفايات الحمأة",ps:"إحصائيات منظمة الصحة العالمية (WHO) وحجم نفايات محطات معالجة المياه.",oz_h:"🌫️ الأزمة الأولى: سمية غاز الأوزون الأرضي (O₃)",oz_d:"حددت منظمة الصحة العالمية الحد الآمن للأوزون بـ 50 جزء في المليار. ماكينات التصوير ومعقمات المستشفيات تتخطى هذا الحد وتسبب التهابات رئوية حادة.",b1:"الحد الآمن لمنظمة الصحة العالمية",b2:"ذروة التلوث الصيفي في المدن",b3:"غرف الطباعة والتصوير المغلقة",sl_h:"💧 الأزمة الثانية: تراكم حمأة معالجة المياه",sl_d:"ينتج العالم أكثر من 53 مليون طن من الحمأة سنوياً، وتسبب حمأة محطات قنا الغنية بالحديد والمنجنيز أعباء بيئية ومادية للتخلص منها.",s1:"الدفن العشوائي (خطر بيئي)",s2:"الحرق أو الردم منخفض القيمة",s3:"إعادة التدوير التحفيزي",stag:"02 • تحليل الفجوة السوقية",sh:"الحلول الموجودة حالياً وعيوبها بالأرقام",ss:"لماذا تفشل الفلاتر التجارية الحالية في التكلفة ومقاومة الرطوبة والاستدامة.",th1:"التقنية المستخدمة",th2:"تكلفة الوحدة",th3:"العمر في الرطوبة",th4:"العيوب ونقاط الضعف",r1_1:"فلاتر الكربون النشط",r1_3:"1–3 شهور (تنسد سريعاً)",r1_4:"بخار الماء يغلق المسام؛ لا تُغسل؛ تتحول لنفايات خطرة.",r2_1:"محفزات MnO₂ / CeO₂ الصناعية",r2_3:"6–12 شهر",r2_4:"تعتمد على معادن نادرة باهظة وتصنيع كيميائي مكلف.",r3_1:"الحمأة المعالجة بالأحماض",r3_3:"متوسط",r3_4:"تستخدم أحماض قوية لاستخلاص معدن واحد وتنتج مخلفات سائلة.",r4_1:"🌱 فيكسو (حمأة قنا الكاملة)",r4_3:"قابلة للتنشيط (3+ دورات)",r4_4:"بدون أحماض؛ تآزر الحديد والمنجنيز يقاوم الرطوبة ويقضي على النفايات."};
+const ar={n1:"الرئيسية",n2:"المشكلة والحلول",n3:"البروتوتايب والميكانيزم",n4:"نتائج التحاليل",n5:"الجدوى والفريق",hp:"🏆 الهندسة البيئية لمعرض آيسف • قنا، مصر",ht1:"إعادة هندسة المخلفات.",ht2:"لرؤية جديدة لهواء نقي.",hs:"يحول مشروع VEXO حمأة معالجة المياه الجوفية في قنا بتركيبتها الكاملة إلى فلتر تحفيزي منخفض التكلفة لإزالة غاز الأوزون بكفاءة تتخطى 85% بدون استخلاص كيميائي مكلف.",b1:"استكشف البروتوتايب والميكانيزم ←",b2:"عرض المشكلة وتحليل السوق",k1_t:"كفاءة إزالة مستهدفة",k1_d:"تكسير تحفيزي لغاز الأوزون السام وتحويله لأكسجين نقي.",k2_t:"أكاسيد نشطة طبيعية",k2_d:"حديد (10.61%) ومنجنيز (1.01%) مثبتة بتحليل XRF في حمأة قنا.",k3_t:"استغلال التركيبة الكاملة",k3_d:"بدون استخلاص بالأحماض أو إضافات صناعية باهظة.",k4_t:"توفير في التكلفة",k4_d:"تكلفة 15 دولار للوحدة مقارنة بأكثر من 200 دولار للفلاتر التجارية."};
 const en={};document.querySelectorAll('[data-i18n]').forEach(e=>en[e.getAttribute('data-i18n')]=e.innerText);
-let lang=localStorage.getItem('vexo_lang')||'en',theme=localStorage.getItem('vexo_theme')||'dark';
-function applyState(){document.documentElement.setAttribute('data-theme',theme);document.getElementById('theme-btn').innerText=theme==='dark'?'☀️ Light':'🌙 Dark';document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';document.getElementById('lang-btn').innerText=lang==='en'?'عربي':'EN';const d=lang==='ar'?ar:en;document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(d[k])e.innerText=d[k]})}
+let lang=localStorage.getItem('vexo_lang')||'en';
+let theme=localStorage.getItem('vexo_theme')||'dark';
+function applyState(){
+  document.documentElement.setAttribute('data-theme',theme);
+  document.getElementById('theme-btn').innerText=theme==='dark'?'☀️ Light':'🌙 Dark';
+  document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.getElementById('lang-btn').innerText=lang==='en'?'عربي':'EN';
+  const d=lang==='ar'?ar:en;
+  document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(d[k])e.innerText=d[k]});
+}
 function toggleTheme(){theme=theme==='dark'?'light':'dark';localStorage.setItem('vexo_theme',theme);applyState()}
 function toggleLang(){lang=lang==='en'?'ar':'en';localStorage.setItem('vexo_lang',lang);applyState()}
+function speak(){if('speechSynthesis' in window){window.speechSynthesis.cancel();window.speechSynthesis.speak(new SpeechSynthesisUtterance("Welcome to VEXO. Engineering whole groundwater treatment sludge from Qena into a low cost catalytic filter for clean air."))}}
 applyState();
 </script>
+</body>
+</html>
+
 </body>
 </html>
