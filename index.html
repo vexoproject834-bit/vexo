@@ -1,357 +1,255 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="dark" data-accent="emerald">
+<html lang="en" dir="ltr" data-theme="dark">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>VEXO — Engineered Sludge for Ozone Removal</title>
+<title>VEXO | Engineered Sludge for Ozone Removal</title>
 <style>
   :root[data-theme="dark"] {
-    --bg: #070b14; --surface: #0f172a; --hover: #1e293b; --border: #1e293b;
-    --text: #f8fafc; --muted: #94a3b8; --nav-bg: rgba(7, 11, 20, 0.92); --sim-bg: #05080f;
+    --bg: #060a12; --surface: #0e1626; --card: #131d31; --border: #1e2d4a;
+    --primary: #10b981; --sec: #38bdf8; --accent: #f59e0b; --text: #f8fafc; --muted: #94a3b8;
   }
   :root[data-theme="light"] {
-    --bg: #f1f5f9; --surface: #ffffff; --hover: #e2e8f0; --border: #cbd5e1;
-    --text: #0f172a; --muted: #475569; --nav-bg: rgba(255, 255, 255, 0.92); --sim-bg: #f8fafc;
+    --bg: #f1f5f9; --surface: #ffffff; --card: #f8fafc; --border: #cbd5e1;
+    --primary: #059669; --sec: #0284c7; --accent: #d97706; --text: #0f172a; --muted: #475569;
   }
-  :root[data-accent="emerald"] { --primary: #10b981; --sec: #38bdf8; --glow: rgba(16, 185, 129, 0.2); }
-  :root[data-accent="blue"]    { --primary: #3b82f6; --sec: #8b5cf6; --glow: rgba(59, 130, 246, 0.2); }
-  :root[data-accent="amber"]   { --primary: #f59e0b; --sec: #10b981; --glow: rgba(245, 158, 11, 0.2); }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
+  html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+  body { background: var(--bg); color: var(--text); line-height: 1.6; transition: 0.3s; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, 'Segoe UI', Tahoma, sans-serif; }
-  body { background: var(--bg); color: var(--text); line-height: 1.65; transition: background 0.3s, color 0.3s; min-height: 100vh; display: flex; flex-direction: column; }
-
-  /* Navbar */
   nav {
-    position: sticky; top: 0; z-index: 100; background: var(--nav-bg); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border); padding: 0.8rem 1.5rem;
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;
+    position: sticky; top: 0; z-index: 100; background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 0.75rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;
   }
-  .logo { font-size: 1.5rem; font-weight: 900; background: linear-gradient(90deg, var(--primary), var(--sec)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
-  .nav-links { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
-  .nav-btn {
-    background: transparent; border: none; color: var(--muted); font-size: 0.88rem; font-weight: 700;
-    padding: 0.45rem 0.85rem; border-radius: 0.6rem; cursor: pointer; transition: 0.2s;
-  }
-  .nav-btn:hover, .nav-btn.active { color: var(--primary); background: var(--glow); }
-  .controls { display: flex; gap: 0.5rem; align-items: center; }
-  .ctrl-btn {
-    background: var(--surface); border: 1px solid var(--border); color: var(--text);
-    padding: 0.4rem 0.75rem; border-radius: 0.6rem; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: 0.2s;
-  }
-  .ctrl-btn:hover { border-color: var(--primary); }
+  .brand { font-size: 1.35rem; font-weight: 900; color: var(--primary); text-decoration: none; }
+  .brand span { color: var(--text); font-weight: 600; font-size: 0.85rem; }
+  .nav-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; font-weight: 700; padding: 0.3rem 0.5rem; border-radius: 0.4rem; }
+  .nav-links a:hover { color: var(--primary); background: rgba(16,185,129,0.1); }
+  .tools { display: flex; gap: 0.4rem; }
+  .t-btn { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 0.35rem 0.65rem; border-radius: 0.5rem; font-size: 0.78rem; font-weight: 700; cursor: pointer; }
+  .t-btn:hover { border-color: var(--primary); }
 
-  /* Pages System */
-  .container { max-width: 1100px; width: 100%; margin: 0 auto; padding: 2.5rem 1.5rem; flex: 1; }
-  .page { display: none; animation: fadeIn 0.35s ease; }
-  .page.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 1.25rem; }
+  section { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
+  .pill { display: inline-block; background: rgba(16,185,129,0.12); color: var(--primary); border: 1px solid rgba(16,185,129,0.3); padding: 0.3rem 0.85rem; border-radius: 999px; font-size: 0.75rem; font-weight: 800; margin-bottom: 0.8rem; }
+  h1 { font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 900; line-height: 1.15; margin-bottom: 1rem; }
+  h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 0.5rem; }
+  h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .sub { color: var(--muted); max-width: 720px; margin-bottom: 1.8rem; font-size: 0.98rem; }
 
-  /* Typography & UI */
-  .pill { display: inline-block; background: var(--surface); border: 1px solid var(--border); color: var(--sec); padding: 0.35rem 0.9rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; }
-  h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; line-height: 1.2; margin-bottom: 1rem; }
-  .grad { background: linear-gradient(90deg, var(--primary), var(--sec)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 0.6rem; }
-  h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
-  .tag { color: var(--primary); font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 0.3rem; }
-  .sub { color: var(--muted); max-width: 720px; margin-bottom: 2rem; font-size: 1rem; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 1.4rem; }
+  .card-hi { border-color: var(--primary); }
 
-  .btn { padding: 0.8rem 1.5rem; border-radius: 0.75rem; font-weight: 700; font-size: 0.92rem; cursor: pointer; border: none; transition: 0.2s; }
-  .btn-p { background: var(--primary); color: #fff; box-shadow: 0 4px 18px var(--glow); }
-  .btn-p:hover { transform: translateY(-2px); filter: brightness(1.08); }
-  .btn-o { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
-  .btn-o:hover { border-color: var(--primary); }
+  .btn { padding: 0.75rem 1.35rem; border-radius: 0.65rem; font-weight: 700; font-size: 0.9rem; cursor: pointer; border: none; text-decoration: none; display: inline-block; }
+  .btn-p { background: var(--primary); color: #fff; }
+  .btn-o { background: var(--card); color: var(--text); border: 1px solid var(--border); }
 
-  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-top: 2rem; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 1.2rem; padding: 1.6rem; transition: 0.25s; }
-  .card-hi { border-color: var(--primary); box-shadow: 0 0 25px var(--glow); }
-  ul.list { list-style: none; }
-  ul.list li { margin-bottom: 0.7rem; color: var(--muted); font-size: 0.92rem; display: flex; gap: 0.6rem; align-items: flex-start; }
+  input[type="range"], select { width: 100%; padding: 0.5rem; border-radius: 0.5rem; background: var(--card); color: var(--text); border: 1px solid var(--border); margin: 0.4rem 0 1rem; accent-color: var(--primary); }
+  table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.88rem; }
+  th, td { padding: 0.85rem; text-align: start; border-bottom: 1px solid var(--border); }
+  th { background: var(--card); color: var(--primary); }
 
-  /* Interactive Bars */
-  .ox-item { margin-bottom: 0.9rem; cursor: pointer; padding: 0.6rem; border-radius: 0.75rem; border: 1px solid transparent; transition: 0.2s; }
-  .ox-item:hover, .ox-act { background: var(--hover); border-color: var(--primary); }
-  .ox-head { display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.35rem; }
-  .bar-bg { background: var(--border); height: 10px; border-radius: 999px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 999px; }
+  .sim-screen { background: #030712; border: 1px solid var(--border); border-radius: 0.85rem; padding: 1.2rem; color: #10b981; font-family: monospace; }
+  .pipe { height: 55px; background: #0f172a; border-radius: 999px; margin: 1rem 0; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; padding: 0 1rem; border: 1px solid #334155; }
+  .bed { background: #b45309; color: #fff; padding: 0.35rem 0.9rem; border-radius: 0.4rem; font-weight: bold; font-size: 0.75rem; z-index: 2; }
+  .flow-dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: #38bdf8; animation: moveAir 2s linear infinite; }
+  @keyframes moveAir { 0% { left: 5%; background: #f43f5e; } 50% { background: #fbbf24; } 100% { left: 92%; background: #10b981; } }
 
-  /* Reactor Buttons */
-  .l-btn { width: 100%; text-align: center; padding: 0.9rem; margin-bottom: 0.6rem; background: var(--surface); border: 1px solid var(--border); border-radius: 0.85rem; color: var(--text); cursor: pointer; transition: 0.2s; display: block; }
-  .l-btn:hover, .l-btn.act { border-color: var(--primary); background: var(--glow); transform: scale(1.01); }
-  .l-st { font-size: 0.72rem; font-weight: 800; color: var(--sec); display: block; margin-bottom: 0.15rem; }
-
-  /* Simulator */
-  input[type="range"] { width: 100%; accent-color: var(--primary); margin: 0.5rem 0 1.4rem; cursor: pointer; }
-  .sim-box { background: var(--sim-bg); border: 1px solid var(--border); border-radius: 1rem; padding: 1.8rem; text-align: center; }
-  .big { font-size: 3.2rem; font-weight: 900; color: var(--primary); line-height: 1.1; margin: 0.4rem 0; }
-
-  /* Team */
-  .t-card { display: flex; align-items: center; gap: 1.2rem; }
-  .avatar { width: 90px; height: 90px; border-radius: 1rem; object-fit: cover; border: 2px solid var(--primary); flex-shrink: 0; }
-
-  footer { text-align: center; padding: 1.5rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: auto; }
+  .t-card { display: flex; align-items: center; gap: 1rem; }
+  .avatar { width: 80px; height: 80px; border-radius: 0.85rem; object-fit: cover; border: 2px solid var(--primary); flex-shrink: 0; }
+  footer { text-align: center; padding: 2rem 1rem; color: var(--muted); font-size: 0.85rem; }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo" onclick="go('home')">VEXO</div>
+  <a href="#" class="brand">VEXO <span>Catalytic Air Systems</span></a>
   <div class="nav-links">
-    <button class="nav-btn active" data-page="home" onclick="go('home')" data-i18n="nav_home">Home</button>
-    <button class="nav-btn" data-page="science" onclick="go('science')" data-i18n="nav_science">Innovation & Method</button>
-    <button class="nav-btn" data-page="matrix" onclick="go('matrix')" data-i18n="nav_matrix">Lab Matrix</button>
-    <button class="nav-btn" data-page="prototype" onclick="go('prototype')" data-i18n="nav_proto">Prototype & Sim</button>
-    <button class="nav-btn" data-page="team" onclick="go('team')" data-i18n="nav_team">Team & Refs</button>
+    <a href="#mechanism" data-i18n="n_mech">Mechanism</a>
+    <a href="#simulator" data-i18n="n_sim">📊 Data & ROI</a>
+    <a href="#comp" data-i18n="n_comp">Competitors</a>
+    <a href="#eco" data-i18n="n_eco">🌿 Air & SDGs</a>
+    <a href="#remote" data-i18n="n_rem">🎮 Live Reactor</a>
+    <a href="#team" data-i18n="n_team">Team & QR</a>
   </div>
-  <div class="controls">
-    <button class="ctrl-btn" onclick="toggleTheme()" id="theme-btn">☀️ Light</button>
-    <button class="ctrl-btn" onclick="toggleAccent()">🎨 Color</button>
-    <button class="ctrl-btn" onclick="toggleLang()" id="lang-btn">عربي</button>
+  <div class="tools">
+    <button class="t-btn" onclick="speakSummary()" id="blind-btn">🔊 Blind Mode</button>
+    <button class="t-btn" onclick="toggleLang()" id="lang-btn">عربي</button>
+    <button class="t-btn" onclick="toggleTheme()" id="theme-btn">☀️ Light</button>
   </div>
 </nav>
 
 <div class="container">
-  <!-- PAGE 1: HOME -->
-  <div id="page-home" class="page active">
-    <div style="text-align:center; padding: 2rem 0;">
-      <span class="pill" data-i18n="hero_pill">ISEF Research Project • Qena, Egypt</span>
-      <h1><span data-i18n="hero_t1">Engineering Waste.</span><br><span class="grad" data-i18n="hero_t2">Rethinking Clean Air.</span></h1>
-      <p class="sub" style="margin: 0 auto 2rem;" data-i18n="hero_desc">
-        Transforming native whole groundwater-treatment sludge from Qena into a cost-effective, multifunctional catalytic material for gas-phase ozone (O₃) removal.
-      </p>
-      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-        <button class="btn btn-p" onclick="go('prototype')" data-i18n="btn_proto">Inspect Prototype & Simulator</button>
-        <button class="btn btn-o" onclick="go('matrix')" data-i18n="btn_matrix">View Qena Lab Results</button>
-      </div>
+  <!-- HERO -->
+  <section style="text-align:center; padding-top:4rem;">
+    <span class="pill" data-i18n="h_pill">🏆 Sustainable Environmental Materials • Qena, Egypt</span>
+    <h1 data-i18n="h_title">VEXO: Whole-Matrix Sludge Catalytic Ozone Filter</h1>
+    <p class="sub" style="margin:0 auto 1.5rem;" data-i18n="h_sub">
+      Replacing costly synthetic catalysts & activated carbon with engineered groundwater-treatment sludge from Qena—achieving &gt;85% gas-phase ozone (O₃) removal at near-zero material cost.
+    </p>
+    <div style="display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap; margin-bottom:2.5rem;">
+      <a href="#simulator" class="btn btn-p" data-i18n="btn_s">📊 Data & ROI Simulator</a>
+      <a href="#remote" class="btn btn-o" data-i18n="btn_r">🎮 Live Reactor Control</a>
     </div>
 
     <div class="grid-4">
+      <div class="card card-hi"><h3>🎯 &gt;85% Removal</h3><p style="font-size:0.82rem; color:var(--muted);" data-i18n="k1">Target gas-phase O₃ decomposition efficiency.</p></div>
+      <div class="card"><h3>🧪 11.6% Active Oxides</h3><p style="font-size:0.82rem; color:var(--muted);" data-i18n="k2">Natural Fe₂O₃ (10.61%) + MnO₂ (1.01%) in Qena sludge.</p></div>
+      <div class="card"><h3>♻️ 100% Waste Valorized</h3><p style="font-size:0.82rem; color:var(--muted);" data-i18n="k3">Zero chemical extraction; whole-matrix retention.</p></div>
+      <div class="card"><h3>💰 ~92% Cheaper</h3><p style="font-size:0.82rem; color:var(--muted);" data-i18n="k4">~$15 industrial unit vs $200+ commercial filters.</p></div>
+    </div>
+  </section>
+
+  <!-- MECHANISM -->
+  <section id="mechanism">
+    <h2 data-i18n="m_h">⚙ Whole-Matrix Catalytic Mechanism</h2>
+    <p class="sub" data-i18n="m_s">Four sequential engineering steps transforming Qena water-plant waste into a high-efficiency ozone filter.</p>
+    <div class="grid-4">
+      <div class="card"><span class="pill">01</span><h3 data-i18n="st1_t">Pre-Washing & Drying</h3><p style="font-size:0.85rem; color:var(--muted);" data-i18n="st1_d">Removes soluble salts & organic impurities to expose active Fe/Mn catalytic sites.</p></div>
+      <div class="card"><span class="pill">02</span><h3 data-i18n="st2_t">Granulation (2–4 mm)</h3><p style="font-size:0.85rem; color:var(--muted);" data-i18n="st2_d">Forms uniform pellets supported by SiO₂ (48.1%) & Al₂O₃ (21.4%) to prevent air pressure drop.</p></div>
+      <div class="card"><span class="pill">03</span><h3 data-i18n="st3_t">Redox O₃ Decomposition</h3><p style="font-size:0.85rem; color:var(--muted);" data-i18n="st3_d">Mn⁴⁺/Mn³⁺ & Fe³⁺/Fe²⁺ electron transfer converts toxic O₃ directly into harmless O₂.</p></div>
+      <div class="card"><span class="pill">04</span><h3 data-i18n="st4_t">Humidity Resistance</h3><p style="font-size:0.85rem; color:var(--muted);" data-i18n="st4_d">Fe–Mn synergy prevents water vapor poisoning and enables thermal regeneration.</p></div>
+    </div>
+  </section>
+  <!-- SIMULATOR & ROI -->
+  <section id="simulator">
+    <h2 data-i18n="sim_h">📊 Interactive Data Analysis & Facility ROI Simulator</h2>
+    <p class="sub" data-i18n="sim_s">Adjust airflow volume, filter scale, and ozone concentration to calculate removal & financial savings.</p>
+
+    <div class="grid-2">
       <div class="card">
-        <div style="font-size:0.78rem; color:var(--muted);" data-i18n="kpi1_l">Core Approach</div>
-        <div style="font-weight:800; color:var(--primary); margin-top:0.2rem;" data-i18n="kpi1_v">Whole-Matrix Retention</div>
+        <label><strong data-i18n="lbl_vol">Airflow Volume (m³/day):</strong> <span id="vol-v" style="color:var(--primary); font-weight:800;">500</span> m³</label>
+        <input type="range" id="vol" min="100" max="5000" step="100" value="500" oninput="calcAll()">
+
+        <label><strong data-i18n="lbl_scale">VEXO Filter Scale:</strong></label>
+        <select id="scale" onchange="calcAll()">
+          <option value="mini">Lab Prototype (50g Sludge Bed)</option>
+          <option value="ind" selected>Commercial / Printing Room Unit (2kg Bed)</option>
+        </select>
+
+        <label><strong data-i18n="lbl_ppm">Inlet Ozone Level (ppm):</strong> <span id="ppm-v" style="color:var(--sec); font-weight:800;">80</span> ppm</label>
+        <input type="range" id="ppm" min="10" max="200" value="80" oninput="calcAll()">
       </div>
-      <div class="card">
-        <div style="font-size:0.78rem; color:var(--muted);" data-i18n="kpi2_l">Target Pollutant</div>
-        <div style="font-weight:800; color:var(--sec); margin-top:0.2rem;" data-i18n="kpi2_v">Ground-Level Ozone (O₃)</div>
-      </div>
-      <div class="card">
-        <div style="font-size:0.78rem; color:var(--muted);" data-i18n="kpi3_l">Feedstock Source</div>
-        <div style="font-weight:800; margin-top:0.2rem;" data-i18n="kpi3_v">Qena Water Residuals</div>
-      </div>
-      <div class="card">
-        <div style="font-size:0.78rem; color:var(--muted);" data-i18n="kpi4_l">Engineering Target</div>
-        <div style="font-weight:800; color:#f59e0b; margin-top:0.2rem;" data-i18n="kpi4_v">&gt;85% O₃ Removal</div>
+
+      <div class="grid-2" style="gap:0.8rem;">
+        <div class="card card-hi"><span style="font-size:0.8rem; color:var(--muted);" data-i18n="o_eff">O₃ Removal Efficiency</span><h2 style="color:var(--primary); margin-top:0.3rem;" id="res-eff">89.5%</h2></div>
+        <div class="card"><span style="font-size:0.8rem; color:var(--muted);" data-i18n="o_cost">VEXO Filter Cost</span><h2 style="color:var(--sec); margin-top:0.3rem;" id="res-cost">180 EGP</h2></div>
+        <div class="card"><span style="font-size:0.8rem; color:var(--muted);" data-i18n="o_sav">Annual Savings vs Carbon</span><h2 style="color:var(--accent); margin-top:0.3rem;" id="res-sav">14,400 EGP</h2></div>
+        <div class="card"><span style="font-size:0.8rem; color:var(--muted);" data-i18n="o_wst">Sludge Waste Reused</span><h2 style="margin-top:0.3rem;" id="res-wst">24 kg/yr</h2></div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div id="page-science" class="page">
-    <span class="tag" data-i18n="sci_tag">01 — Novelty & Methodology</span>
-    <h2 data-i18n="sci_title">Keep the matrix. Don't isolate one component.</h2>
-    <p class="sub" data-i18n="sci_sub">Instead of energy-intensive chemical extraction, VEXO utilizes the natural synergy of iron, manganese, and aluminosilicates present in Qena sludge.</p>
+  <!-- COMPETITORS & SWOT -->
+  <section id="comp">
+    <h2 data-i18n="c_h">🏆 Air Purification Competitors & SWOT</h2>
+    <div class="card" style="overflow-x:auto; margin-bottom:1.5rem;">
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>🌱 VEXO (Qena Sludge)</th><th>Activated Carbon Filters</th><th>Synthetic MnO₂ / CeO₂</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Unit Cost</strong></td><td><strong>~$15 (750 EGP)</strong></td><td>$120 – $250</td><td>$300 – $600+</td></tr>
+          <tr><td><strong>Raw Material</strong></td><td><strong>Zero-Cost Water Waste</strong></td><td>Mined Coal / Coconut Shell</td><td>Expensive Rare Earths</td></tr>
+          <tr><td><strong>Humidity Stability</strong></td><td><strong>✅ High (Fe–Mn Synergy)</strong></td><td>❌ Degrades Rapidly</td><td>⚠️ Moderate</td></tr>
+          <tr><td><strong>Circular Impact</strong></td><td><strong>✅ Solves Sludge Waste</strong></td><td>❌ High Carbon Footprint</td><td>❌ Chemical Waste</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid-2">
+      <div class="card card-hi"><h3 data-i18n="str_h">💪 Our Strengths</h3><ul style="padding-inline-start:1.2rem; color:var(--muted); font-size:0.9rem;"><li>92% cheaper than commercial ozone scrubbers.</li><li>Whole-matrix approach avoids acid leaching costs.</li><li>Abundant local supply from Qena water stations.</li></ul></div>
+      <div class="card"><h3 data-i18n="fut_h">🚀 Future Engineering Goals</h3><ul style="padding-inline-start:1.2rem; color:var(--muted); font-size:0.9rem;"><li>3D-printed honeycomb monoliths for ultra-low pressure drop.</li><li>Solar-powered IoT smart air purifier integration.</li><li>Pilot testing in Qena printing presses & hospitals.</li></ul></div>
+    </div>
+  </section>
 
-        <div class="grid-2" style="margin-bottom:2.5rem;">
-      <div class="card">
-        <span style="font-size:0.75rem; color:#f43f5e; font-weight:800;" data-i18n="conv_tag">CONVENTIONAL PATHWAY • HIGH COST</span>
-        <h3 style="margin-top:0.3rem;" data-i18n="conv_h">Single-Component Extraction</h3>
-        <ul class="list">
-          <li><span style="color:#f43f5e;">✕</span> <span data-i18n="conv_1">Chemically separate one target metal or mineral.</span></li>
-          <li><span style="color:#f43f5e;">✕</span> <span data-i18n="conv_2">High energy use & secondary chemical waste.</span></li>
-          <li><span style="color:#f43f5e;">✕</span> <span data-i18n="conv_3">Requires expensive synthetic dopants (e.g., CeO₂).</span></li>
-        </ul>
+  <!-- ECO & AIR DOCTOR -->
+  <section id="eco">
+    <h2 data-i18n="e_h">🌿 Interactive Ozone Hazard Advisor & UN SDGs</h2>
+    <div class="card" style="margin-bottom:1.5rem;">
+      <h3 data-i18n="doc_h">🔬 Select Indoor / Industrial Environment:</h3>
+      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin:0.8rem 0;">
+        <button class="btn btn-o" onclick="setEnv(0)">🖨️ Printing & Copy Center</button>
+        <button class="btn btn-o" onclick="setEnv(1)">🏥 Hospital Sterilization Room</button>
+        <button class="btn btn-o" onclick="setEnv(2)">🏭 Industrial Weld / UV Zone</button>
       </div>
-      <div class="card card-hi">
-        <span style="font-size:0.75rem; color:var(--primary); font-weight:800;" data-i18n="vexo_tag">VEXO INNOVATION • CIRCULAR ECONOMY</span>
-        <h3 style="margin-top:0.3rem;" data-i18n="vexo_h">Whole-Matrix Valorization</h3>
-        <ul class="list">
-          <li><span style="color:var(--primary);">✓</span> <span data-i18n="vexo_1">Retain native Qena sludge matrix intact.</span></li>
-          <li><span style="color:var(--primary);">✓</span> <span data-i18n="vexo_2">Simple physical washing & granulation engineering.</span></li>
-          <li><span style="color:var(--primary);">✓</span> <span data-i18n="vexo_3">Synergistic Fe₂O₃–MnO₂–SiO₂ active interfaces.</span></li>
-        </ul>
-      </div>
+      <div id="env-box" style="padding:1rem; background:var(--card); border-radius:0.75rem; font-size:0.92rem;"></div>
     </div>
 
-    <h3 data-i18n="meth_h">Controlled Experimental Groups</h3>
-    <div class="grid-4" style="margin-top:1rem;">
-      <div class="card"><strong style="color:var(--muted);">01. Blank</strong><p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;" data-i18n="m1">Empty reactor baseline for natural O₃ decay.</p></div>
-      <div class="card"><strong style="color:var(--sec);">02. Untreated</strong><p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;" data-i18n="m2">Raw dried Qena sludge baseline activity.</p></div>
-      <div class="card card-hi"><strong style="color:var(--primary);">03. Engineered</strong><p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;" data-i18n="m3">Washed & granulated sludge for low pressure drop.</p></div>
-      <div class="card"><strong style="color:#f59e0b;">04. Reference</strong><p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;" data-i18n="m4">Commercial MnO₂ / Activated Carbon benchmark.</p></div>
+    <div class="grid-4">
+      <div class="card"><strong>SDG 3 • Good Health</strong><p style="font-size:0.82rem; color:var(--muted); margin-top:0.3rem;">Protects lungs from ground-level ozone toxicity.</p></div>
+      <div class="card"><strong>SDG 9 • Innovation</strong><p style="font-size:0.82rem; color:var(--muted); margin-top:0.3rem;">Converts municipal waste into advanced catalysts.</p></div>
+      <div class="card"><strong>SDG 11 • Clean Cities</strong><p style="font-size:0.82rem; color:var(--muted); margin-top:0.3rem;">Affordable air filtration for Upper Egypt facilities.</p></div>
+      <div class="card"><strong>SDG 12 • Circular Economy</strong><p style="font-size:0.82rem; color:var(--muted); margin-top:0.3rem;">Eliminates hazardous sludge landfill disposal.</p></div>
     </div>
-  </div>
+  </section>
 
-  <!-- PAGE 3: LAB MATRIX -->
-  <div id="page-matrix" class="page">
-    <span class="tag" data-i18n="mat_tag">02 — Preliminary Lab Results</span>
-    <h2 data-i18n="mat_title">Qena Sludge Oxide Composition (XRF/XRD)</h2>
-    <p class="sub" data-i18n="mat_sub">Click any oxide component below to inspect its functional role in ozone decomposition.</p>
-
-    <div class="grid-2" style="align-items:center;">
-      <div class="card" id="ox-bars"></div>
-      <div class="card card-hi">
-        <span class="tag" style="color:var(--sec);" data-i18n="role_lbl">Component Catalytic Role</span>
-        <h3 id="ox-t" style="font-size:1.35rem;"></h3>
-        <p id="ox-d" style="color:var(--muted);"></p>
-        <div style="margin-top:1.5rem; padding:0.8rem; border-radius:0.75rem; background:var(--sim-bg); font-size:0.82rem; color:var(--muted);" data-i18n="status_note">
-          Current Status: Chemical & XRD characterization completed. Washing optimization & ozone reactor testing are underway.
+  <!-- LIVE REMOTE & 2D SIM -->
+  <section id="remote">
+    <h2 data-i18n="r_h">🎮 VEXO Live Prototype Monitor & 2D Flow Sim</h2>
+    <p class="sub" data-i18n="r_s">Simulated ESP32 sensor telemetry & catalytic bed airflow visualization.</p>
+    <div class="grid-2">
+      <div class="sim-screen">
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+          <span>📡 ESP32-O3 TELEMETRY</span><span id="sys-stat" style="color:#38bdf8;">● ACTIVE</span>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PAGE 4: PROTOTYPE & SIMULATOR -->
-  <div id="page-prototype" class="page">
-    <span class="tag" data-i18n="pro_tag">03 — Reactor & Validation</span>
-    <h2 data-i18n="pro_title">Interactive Fixed-Bed Reactor</h2>
-    <p class="sub" data-i18n="pro_sub">Click on any stage of the vertical reactor to inspect its engineering design.</p>
-
-    <div class="grid-2" style="align-items:center; margin-bottom:2.5rem;">
-      <div id="reactor-btns"></div>
-      <div class="card">
-        <span class="pill" id="st-b"></span>
-        <h3 id="st-t" style="font-size:1.35rem;"></h3>
-        <p id="st-d" style="color:var(--muted);"></p>
-      </div>
-    </div>
-
-    <div class="card card-hi">
-      <h3 data-i18n="sim_h">Live Ozone Removal Efficiency Simulator</h3>
-      <p style="font-size:0.88rem; color:var(--muted); margin-bottom:1.5rem;">η (%) = [(C_in − C_out) / C_in] × 100</p>
-      <div class="grid-2" style="align-items:center;">
-        <div>
-          <div style="display:flex; justify-content:space-between; font-size:0.9rem;"><span data-i18n="cin_lbl">Inlet Ozone (C_in):</span><strong style="color:var(--sec);"><span id="cin-t">100</span> ppm</strong></div>
-          <input type="range" id="cin" min="20" max="200" value="100" oninput="sim()">
-          <div style="display:flex; justify-content:space-between; font-size:0.9rem;"><span data-i18n="cout_lbl">Outlet Ozone (C_out):</span><strong style="color:var(--primary);"><span id="cout-t">12</span> ppm</strong></div>
-          <input type="range" id="cout" min="0" max="100" value="12" oninput="sim()">
+        <div class="pipe">
+          <span style="font-size:0.75rem; color:#f43f5e; z-index:2;">IN: <b id="s-in">85</b> ppm</span>
+          <div class="bed">VEXO SLUDGE BED</div>
+          <span style="font-size:0.75rem; color:#10b981; z-index:2;">OUT: <b id="s-out">9</b> ppm</span>
+          <div class="flow-dot" id="dot1"></div>
         </div>
-        <div class="sim-box">
-          <div style="font-size:0.8rem; color:var(--muted);" data-i18n="eff_lbl">Removal Efficiency</div>
-          <div class="big" id="eff-t">88.0%</div>
-          <div id="eff-b" style="font-weight:700; font-size:0.85rem;"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PAGE 5: TEAM & REFS -->
-  <div id="page-team" class="page">
-    <span class="tag" data-i18n="team_tag">04 — Researchers & Literature</span>
-    <h2 data-i18n="team_title">Meet the VEXO Team</h2>
-    <p class="sub" data-i18n="team_sub">Student Researchers • Qena Governorate, Egypt</p>
-
-    <div class="grid-2" style="margin-bottom:2.5rem;">
-      <div class="card t-card">
-        <img src="nour.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://w3.org width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%2310b981%22/><text x=%2250%%22 y=%2255%%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2234%22 fill=%22white%22 font-family=%22sans-serif%22>NS</text></svg>'" alt="Nour Al-Hoda Saad" class="avatar">
-        <div>
-          <h3 style="margin-bottom:0.2rem;" data-i18n="n_name">Nour Al-Hoda Saad</h3>
-          <div style="color:var(--primary); font-size:0.78rem; font-weight:800; margin-bottom:0.4rem;" data-i18n="role_co">CO-LEAD RESEARCHER</div>
-          <p style="color:var(--muted); font-size:0.85rem;" data-i18n="n_bio">Sludge sampling, XRD/XRF chemical characterization, and catalytic matrix optimization.</p>
+        <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-top:0.8rem;">
+          <span>Efficiency: <b id="s-eff" style="color:#fff;">89.4%</b></span>
+          <span>Humidity: <b>68% RH</b></span>
+          <span>ΔP: <b>18 Pa</b></span>
         </div>
       </div>
 
-      <div class="card t-card">
-        <img src="sara.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://w3.org width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%2338bdf8%22/><text x=%2250%%22 y=%2255%%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2234%22 fill=%22white%22 font-family=%22sans-serif%22>SG</text></svg>'" alt="Sara Gomaa" class="avatar">
-        <div>
-          <h3 style="margin-bottom:0.2rem;" data-i18n="s_name">Sara Gomaa</h3>
-          <div style="color:var(--sec); font-size:0.78rem; font-weight:800; margin-bottom:0.4rem;" data-i18n="role_co">CO-LEAD RESEARCHER</div>
-          <p style="color:var(--muted); font-size:0.85rem;" data-i18n="s_bio">Fixed-bed reactor engineering, airflow dynamics, and humidity resistance testing.</p>
+      <div class="card">
+        <h3>🎛️ Reactor Controls</h3>
+        <label>Fan Airflow Speed: <b id="fan-v">75%</b></label>
+        <input type="range" id="fan" min="20" max="100" value="75" oninput="updateLive()">
+        <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+          <button class="btn btn-p" onclick="pulseTest()">⚡ Run O₃ Spike Test</button>
+          <button class="btn btn-o" onclick="resetLive()">🔄 Reset Normal</button>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3 data-i18n="ref_h">Key Scientific References</h3>
-      <ol style="padding-inline-start:1.25rem; color:var(--muted); font-size:0.85rem; margin-top:0.8rem;">
-        <li style="margin-bottom:0.5rem;">Dai, W., et al. (2023). Exceptional ozone decomposition over δ-MnO₂/AC under an entire humidity environment. <em>Environmental Science & Technology</em>, 57(46), 17727–17736.</li>
-        <li style="margin-bottom:0.5rem;">Ye, L., et al. (2024). One-step synthesis of sludge-derived MnOx catalysts for highly efficient removal of gaseous ozone. <em>Applied Catalysis B: Environment and Energy</em>, 345, 123696.</li>
-        <li>Jia, J., Yang, W., & Zhang, P. (2017). Facile synthesis of Fe-modified manganese oxide with high content of oxygen vacancies for airborne ozone destruction. <em>Applied Catalysis A</em>, 546, 79–86.</li>
-      </ol>
+  <!-- TEAM & QR -->
+  <section id="team" style="border-bottom:none;">
+    <h2 data-i18n="t_h">👩‍🔬 Research Team & Poster QR Code</h2>
+    <div class="grid-2" style="align-items:center; margin-top:1.5rem;">
+      <div style="display:flex; flex-direction:column; gap:1rem;">
+        <div class="card t-card">
+          <img src="nour.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://w3.org width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%2310b981%22/><text x=%2250%%22 y=%2255%%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2234%22 fill=%22white%22 font-family=%22sans-serif%22>NS</text></svg>'" class="avatar" alt="Nour">
+          <div><h3>Nour Al-Hoda Saad</h3><p style="font-size:0.82rem; color:var(--primary); font-weight:700;">Materials Characterization (XRD/XRF)</p><p style="font-size:0.82rem; color:var(--muted);">Qena Governorate, Egypt</p></div>
+        </div>
+        <div class="card t-card">
+          <img src="sara.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://w3.org width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%2338bdf8%22/><text x=%2250%%22 y=%2255%%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2234%22 fill=%22white%22 font-family=%22sans-serif%22>SG</text></svg>'" class="avatar" alt="Sara">
+          <div><h3>Sara Gomaa</h3><p style="font-size:0.82rem; color:var(--sec); font-weight:700;">Reactor Design & Validation</p><p style="font-size:0.82rem; color:var(--muted);">Qena Governorate, Egypt</p></div>
+        </div>
+      </div>
+
+      <div class="card card-hi" style="text-align:center;">
+        <h3>📱 Scan to Launch VEXO Web</h3>
+        <p style="font-size:0.82rem; color:var(--muted); margin-bottom:1rem;">Download this QR code and print it on your ISEF poster.</p>
+        <img id="qr-img" src="https://qrserver.com" alt="VEXO QR" style="border-radius:0.75rem; border:4px solid #fff; margin-bottom:1rem;">
+        <br><button class="btn btn-p" onclick="downloadQR()">⬇ Download QR PNG</button>
+      </div>
     </div>
-  </div>
+  </section>
 </div>
 
-<footer data-i18n="footer">VEXO Research Project • Engineered Groundwater-Treatment Sludge for Clean Air • Qena, Egypt</footer>
-  <script>
-let lang='en',selectedOx=2,selectedStage=0,accIdx=0;
-const accents=['emerald','blue','amber'];
-const dict={
-  en:{
-    nav_home:"Home",nav_science:"Innovation & Method",nav_matrix:"Lab Matrix",nav_proto:"Prototype & Sim",nav_team:"Team & Refs",
-    hero_pill:"ISEF Research Project • Qena, Egypt",hero_t1:"Engineering Waste.",hero_t2:"Rethinking Clean Air.",
-    hero_desc:"Transforming native whole groundwater-treatment sludge from Qena into a cost-effective, multifunctional catalytic material for gas-phase ozone (O₃) removal.",
-    btn_proto:"Inspect Prototype & Simulator",btn_matrix:"View Qena Lab Results",
-    kpi1_l:"Core Approach",kpi1_v:"Whole-Matrix Retention",kpi2_l:"Target Pollutant",kpi2_v:"Ground-Level Ozone (O₃)",
-    kpi3_l:"Feedstock Source",kpi3_v:"Qena Water Residuals",kpi4_l:"Engineering Target",kpi4_v:">85% O₃ Removal",
-    sci_tag:"01 — Novelty & Methodology",sci_title:"Keep the matrix. Don't isolate one component.",
-    sci_sub:"Instead of energy-intensive chemical extraction, VEXO utilizes the natural synergy of iron, manganese, and aluminosilicates present in Qena sludge.",
-    conv_tag:"CONVENTIONAL PATHWAY • HIGH COST",conv_h:"Single-Component Extraction",
-    conv_1:"Chemically separate one target metal or mineral.",conv_2:"High energy use & secondary chemical waste.",conv_3:"Requires expensive synthetic dopants (e.g., CeO₂).",
-    vexo_tag:"VEXO INNOVATION • CIRCULAR ECONOMY",vexo_h:"Whole-Matrix Valorization",
-    vexo_1:"Retain native Qena sludge matrix intact.",vexo_2:"Simple physical washing & granulation engineering.",vexo_3:"Synergistic Fe₂O₃–MnO₂–SiO₂ active interfaces.",
-    meth_h:"Controlled Experimental Groups",
-    m1:"Empty reactor baseline for natural O₃ decay.",m2:"Raw dried Qena sludge baseline activity.",
-    m3:"Washed & granulated sludge for low pressure drop.",m4:"Commercial MnO₂ / Activated Carbon benchmark.",
-    mat_tag:"02 — Preliminary Lab Results",mat_title:"Qena Sludge Oxide Composition (XRF/XRD)",
-    mat_sub:"Click any oxide component below to inspect its functional role in ozone decomposition.",
-    role_lbl:"Component Catalytic Role",
-    status_note:"Current Status: Chemical & XRD characterization completed. Washing optimization & ozone reactor testing are underway.",
-    pro_tag:"03 — Reactor & Validation",pro_title:"Interactive Fixed-Bed Reactor",
-    pro_sub:"Click on any stage of the vertical reactor to inspect its engineering design.",
-    sim_h:"Live Ozone Removal Efficiency Simulator",cin_lbl:"Inlet Ozone (C_in):",cout_lbl:"Outlet Ozone (C_out):",eff_lbl:"Removal Efficiency",
-    team_tag:"04 — Researchers & Literature",team_title:"Meet the VEXO Team",team_sub:"Student Researchers • Qena Governorate, Egypt",
-    n_name:"Nour Al-Hoda Saad",s_name:"Sara Gomaa",role_co:"CO-LEAD RESEARCHER",
-    n_bio:"Sludge sampling, XRD/XRF chemical characterization, and catalytic matrix optimization.",
-    s_bio:"Fixed-bed reactor engineering, airflow dynamics, and humidity resistance testing.",
-    ref_h:"Key Scientific References",footer:"VEXO Research Project • Engineered Groundwater-Treatment Sludge for Clean Air • Qena, Egypt",
-    pass:"✓ Exceeds 85% Engineering Target",warn:"⚠ Below 85% Target Efficiency"
-  },
-  ar:{
-    nav_home:"الرئيسية",nav_science:"الابتكار والمنهجية",nav_matrix:"تحاليل الحمأة",nav_proto:"البروتوتايب والمحاكي",nav_team:"الفريق والمراجع",
-    hero_pill:"مشروع بحثي لمعرض آيسف (ISEF) • قنا، مصر",hero_t1:"إعادة هندسة المخلفات.",hero_t2:"لرؤية جديدة لهواء نقي.",
-    hero_desc:"تحويل حمأة معالجة المياه الجوفية في قنا بتركيبتها الطبيعية الكاملة إلى مادة محفزة منخفضة التكلفة لإزالة غاز الأوزون (O₃) من الهواء.",
-    btn_proto:"استكشف المفاعل والمحاكي",btn_matrix:"نتائج تحاليل حمأة قنا",
-    kpi1_l:"المنهجية الأساسية",kpi1_v:"استغلال التركيبة الكاملة",kpi2_l:"الملوث المستهدف",kpi2_v:"غاز الأوزون الأرضي (O₃)",
-    kpi3_l:"مصدر المادة الخام",kpi3_v:"مخلفات محطات مياه قنا",kpi4_l:"الهدف الهندسي",kpi4_v:"كفاءة إزالة أعلى من 85%",
-    sci_tag:"01 — الابتكار ومنهجية البحث",sci_title:"حافظ على التركيبة الكاملة.. لا تعزل عنصراً واحداً.",
-    sci_sub:"بدلاً من الاستخلاص الكيميائي المكلف، يستغل مشروع VEXO التآزر الطبيعي بين أكاسيد الحديد والمنجنيز والسيليكا الموجودة في حمأة قنا.",
-    conv_tag:"الطريقة التقليدية • تكلفة عالية",conv_h:"استخلاص عنصر واحد فقط",
-    conv_1:"فصل معدن واحد كيميائياً من الحمأة.",conv_2:"استهلاك عالٍ للطاقة ومخلفات كيميائية ثانوية.",conv_3:"يتطلب إضافات صناعية باهظة الثمن (مثل CeO₂).",
-    vexo_tag:"ابتكار VEXO • اقتصاد دائري",vexo_h:"تثمين التركيبة المتكاملة للحمأة",
-    vexo_1:"استخدام تركيبة حمأة قنا الطبيعية كما هي.",vexo_2:"هندسة فيزيائية بسيطة بالغسيل والتشكيل لحبيبات.",vexo_3:"تفاعل تآزري نشط بين (Fe₂O₃–MnO₂–SiO₂).",
-    meth_h:"المجموعات التجريبية القياسية",
-    m1:"مفاعل فارغ لقياس التحلل الطبيعي للأوزون.",m2:"حمأة قنا الخام المجففة لقياس النشاط الأساسي.",
-    m3:"الحمأة المغسولة والمشكلة لمنع انسداد الهواء.",m4:"محفز تجاري (MnO₂ / كربون نشط) للمقارنة.",
-    mat_tag:"02 — النتائج المعملية الأولية",mat_title:"التحليل الكيميائي لأكاسيد حمأة قنا",
-    mat_sub:"اضغط على أي عنصر أدناه لمعرفة دوره التحفيزي أو البنائي في تكسير الأوزون.",
-    role_lbl:"الدور الوظيفي للعنصر",
-    status_note:"الوضع الحالي: تم الانتهاء من التحاليل الكيميائية وحيود الأشعة السينية (XRD)، وجارٍ العمل على الغسيل واختبارات الأوزون.",
-    pro_tag:"03 — البروتوتايب والمحاكاة",pro_title:"المفاعل التفاعلي ذو التدفق الرأسي",
-    pro_sub:"اضغط على أي مرحلة من مراحل المفاعل لاستعراض وظيفتها الهندسية.",
-    sim_h:"محاكي حساب كفاءة إزالة الأوزون",cin_lbl:"تركيز الأوزون الداخل (C_in):",cout_lbl:"تركيز الأوزون الخارج (C_out):",eff_lbl:"نسبة كفاءة الإزالة",
-    team_tag:"04 — فريق البحث والمراجع",team_title:"فريق مشروع VEXO",team_sub:"باحثتان • محافظة قنا، مصر",
-    n_name:"نور الهدى سعد",s_name:"سارة جمعة",role_co:"باحثة رئيسية مشاركة",
-    n_bio:"مسؤولة عن تجميع العينات، التحاليل الكيميائية (XRD/XRF)، وتحسين خصائص المادة المحفزة.",
-    s_bio:"مسؤولة عن تصميم المفاعل الهندسي، ديناميكا تدفق الهواء، واختبارات مقاومة الرطوبة.",
-    ref_h:"أهم المراجع العلمية",footer:"مشروع VEXO البحثي • هندسة حمأة معالجة المياه لتنقية الهواء • قنا، مصر",
-    pass:"✓ يحقق الهدف الهندسي (>85%)",warn:"⚠ أقل من الكفاءة المستهدفة (85%)"
-  }
-};
-const oxides=[
-  {en:"Silicon Dioxide (SiO₂)",ar:"ثاني أكسيد السيليكون (SiO₂)",p:48.14,c:"#94a3b8",d_en:"Forms the porous structural backbone and high-surface-area support matrix that disperses active metal oxides.",d_ar:"يشكل الهيكل المسامي الداعم ذو المساحة السطحية العالية الذي يوزع الأكاسيد النشطة."},
-  {en:"Aluminum Oxide (Al₂O₃)",ar:"أكسيد الألومنيوم (Al₂O₃)",p:21.41,c:"#38bdf8",d_en:"Enhances mechanical strength of sludge granules and provides thermal stability during regeneration.",d_ar:"يعزز المتانة الميكانيكية لحبيبات الحمأة ويمنحها استقراراً حرارياً أثناء دورات إعادة الاستخدام."},
-  {en:"Iron Oxide (Fe₂O₃)",ar:"أكسيد الحديد (Fe₂O₃)",p:10.61,c:"#f59e0b",d_en:"Provides abundant surface redox sites (Fe³⁺/Fe²⁺) and enhances structural moisture resistance when interacting with manganese phases.",d_ar:"يوفر مواقع أكسدة واختزال نشطة ويعزز مقاومة المادة للرطوبة عند تداخله مع أكاسيد المنجنيز."},
-  {en:"Calcium & Sulfates (CaO/SO₃)",ar:"مركبات الكالسيوم والكبريتات",p:11.14,c:"#818cf8",d_en:"Influences surface alkalinity and pore structure; regulated via pre-washing treatment.",d_ar:"يؤثر على قاعدية السطح وبنية المسام، ويتم ضبط نسبته من خلال خطوة الغسيل المسبق."},
-  {en:"Manganese Dioxide (MnO₂)",ar:"ثاني أكسيد المنجنيز (MnO₂)",p:1.01,c:"#10b981",d_en:"Primary catalytic active phase known for rapid electron transfer and decomposition of O₃ into O₂.",d_ar:"الطور التحفيزي النشط الرئيسي المسؤول عن نقل الإلكترونات وتكسير غاز الأوزون (O₃) إلى أكسجين (O₂)."}
-];
-const stages=[
-  {b_en:"Stage 5 • Top Outlet",b_ar:"المرحلة 5 • المخرج العلوي",t_en:"Perforated Air Outlet & C_out Sensor",t_ar:"مخرج الهواء النقي وحساس القياس الخارجي",d_en:"Releases purified air after catalytic decomposition and houses the outlet ozone sensor (C_out) to measure real-time removal efficiency.",d_ar:"يسمح بخروج الهواء النقي بعد تكسير الأوزون ويضم الحساس الخارجي (C_out) لقياس كفاءة الإزالة لحظياً."},
-  {b_en:"Stage 4 • Upper Mesh",b_ar:"المرحلة 4 • الشبكة العلوية",t_en:"Upper Retaining Mesh",t_ar:"شبكة التثبيت العلوية",d_en:"Prevents fine granules from escaping during high airflow rates while maintaining minimal pressure drop.",d_ar:"تمنع تطاير حبيبات الحمأة مع تدفق الهواء المرتفع دون التسبب في إعاقة مرور الهواء."},
-  {b_en:"Stage 3 • Active Core",b_ar:"المرحلة 3 • قلب المفاعل",t_en:"Whole Engineered Sludge Bed",t_ar:"طبقة الحمأة الهندسية المتكاملة",d_en:"Packed bed of washed, granulated Qena groundwater sludge where Fe₂O₃, MnO₂, and SiO₂ synergistically decompose O₃ into O₂.",d_ar:"الطبقة النشطة المكونة من حبيبات حمأة قنا المغسولة حيث تتفاعل الأكاسيد معاً لتكسير الأوزون."},
-  {b_en:"Stage 2 • Lower Mesh",b_ar:"المرحلة 2 • الشبكة السفلية",t_en:"Bottom Support Mesh",t_ar:"شبكة الدعم وتوزيع الهواء",d_en:"Supports the catalytic bed weight and ensures uniform airflow distribution across the entire cross-section.",d_ar:"تحمل وزن طبقة الحمأة وتضمن توزيع الهواء بالتساوي على كامل مساحة المفاعل."},
-  {b_en:"Stage 1 • Base Inlet",b_ar:"المرحلة 1 • القاعدة والمدخل",t_en:"Air Inlet, Fan & C_in Sensor",t_ar:"مدخل الهواء والمروحة والحساس الداخلي",d_en:"Draws ozone-laden air into the vertical chamber at a controlled flow rate and measures baseline inlet concentration (C_in).",d_ar:"تسحب المروحة الهواء المحمل بالأوزون بمعدل تدفق ثابت مع قياس التركيز الابتدائي (C_in)."}
-];
-function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'})}
-function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);document.getElementById('theme-btn').innerText=n==='dark'?'☀️ Light':'🌙 Dark'}
+<footer><strong>VEXO</strong> — Engineered Groundwater-Treatment Sludge for Clean Air • ISEF Project (Qena, Egypt)</footer>
 
-
-
+<script>
+let lang='en';
+const envs=[
+  "<strong>🖨️ Printing & Copy Centers:</strong> Laser printers emit 40–120 ppm O₃ locally. VEXO compact hood filter removes >89% O₃ continuously.",
+  "<strong>🏥 Hospital Sterilization Rooms:</strong> Post-sterilization O₃ venting requires safe breakdown. VEXO operates safely even at 70% humidity.",
+  "<strong>🏭 Industrial Weld / UV Zones:</strong> High-volume O₃ generation. VEXO 2kg modular bed cuts filter replacement costs by 92%."
