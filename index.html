@@ -271,5 +271,87 @@
 </div>
 
 <footer data-i18n="footer">VEXO Research Project • Engineered Groundwater-Treatment Sludge for Clean Air • Qena, Egypt</footer>
+  <script>
+let lang='en',selectedOx=2,selectedStage=0,accIdx=0;
+const accents=['emerald','blue','amber'];
+const dict={
+  en:{
+    nav_home:"Home",nav_science:"Innovation & Method",nav_matrix:"Lab Matrix",nav_proto:"Prototype & Sim",nav_team:"Team & Refs",
+    hero_pill:"ISEF Research Project • Qena, Egypt",hero_t1:"Engineering Waste.",hero_t2:"Rethinking Clean Air.",
+    hero_desc:"Transforming native whole groundwater-treatment sludge from Qena into a cost-effective, multifunctional catalytic material for gas-phase ozone (O₃) removal.",
+    btn_proto:"Inspect Prototype & Simulator",btn_matrix:"View Qena Lab Results",
+    kpi1_l:"Core Approach",kpi1_v:"Whole-Matrix Retention",kpi2_l:"Target Pollutant",kpi2_v:"Ground-Level Ozone (O₃)",
+    kpi3_l:"Feedstock Source",kpi3_v:"Qena Water Residuals",kpi4_l:"Engineering Target",kpi4_v:">85% O₃ Removal",
+    sci_tag:"01 — Novelty & Methodology",sci_title:"Keep the matrix. Don't isolate one component.",
+    sci_sub:"Instead of energy-intensive chemical extraction, VEXO utilizes the natural synergy of iron, manganese, and aluminosilicates present in Qena sludge.",
+    conv_tag:"CONVENTIONAL PATHWAY • HIGH COST",conv_h:"Single-Component Extraction",
+    conv_1:"Chemically separate one target metal or mineral.",conv_2:"High energy use & secondary chemical waste.",conv_3:"Requires expensive synthetic dopants (e.g., CeO₂).",
+    vexo_tag:"VEXO INNOVATION • CIRCULAR ECONOMY",vexo_h:"Whole-Matrix Valorization",
+    vexo_1:"Retain native Qena sludge matrix intact.",vexo_2:"Simple physical washing & granulation engineering.",vexo_3:"Synergistic Fe₂O₃–MnO₂–SiO₂ active interfaces.",
+    meth_h:"Controlled Experimental Groups",
+    m1:"Empty reactor baseline for natural O₃ decay.",m2:"Raw dried Qena sludge baseline activity.",
+    m3:"Washed & granulated sludge for low pressure drop.",m4:"Commercial MnO₂ / Activated Carbon benchmark.",
+    mat_tag:"02 — Preliminary Lab Results",mat_title:"Qena Sludge Oxide Composition (XRF/XRD)",
+    mat_sub:"Click any oxide component below to inspect its functional role in ozone decomposition.",
+    role_lbl:"Component Catalytic Role",
+    status_note:"Current Status: Chemical & XRD characterization completed. Washing optimization & ozone reactor testing are underway.",
+    pro_tag:"03 — Reactor & Validation",pro_title:"Interactive Fixed-Bed Reactor",
+    pro_sub:"Click on any stage of the vertical reactor to inspect its engineering design.",
+    sim_h:"Live Ozone Removal Efficiency Simulator",cin_lbl:"Inlet Ozone (C_in):",cout_lbl:"Outlet Ozone (C_out):",eff_lbl:"Removal Efficiency",
+    team_tag:"04 — Researchers & Literature",team_title:"Meet the VEXO Team",team_sub:"Student Researchers • Qena Governorate, Egypt",
+    n_name:"Nour Al-Hoda Saad",s_name:"Sara Gomaa",role_co:"CO-LEAD RESEARCHER",
+    n_bio:"Sludge sampling, XRD/XRF chemical characterization, and catalytic matrix optimization.",
+    s_bio:"Fixed-bed reactor engineering, airflow dynamics, and humidity resistance testing.",
+    ref_h:"Key Scientific References",footer:"VEXO Research Project • Engineered Groundwater-Treatment Sludge for Clean Air • Qena, Egypt",
+    pass:"✓ Exceeds 85% Engineering Target",warn:"⚠ Below 85% Target Efficiency"
+  },
+  ar:{
+    nav_home:"الرئيسية",nav_science:"الابتكار والمنهجية",nav_matrix:"تحاليل الحمأة",nav_proto:"البروتوتايب والمحاكي",nav_team:"الفريق والمراجع",
+    hero_pill:"مشروع بحثي لمعرض آيسف (ISEF) • قنا، مصر",hero_t1:"إعادة هندسة المخلفات.",hero_t2:"لرؤية جديدة لهواء نقي.",
+    hero_desc:"تحويل حمأة معالجة المياه الجوفية في قنا بتركيبتها الطبيعية الكاملة إلى مادة محفزة منخفضة التكلفة لإزالة غاز الأوزون (O₃) من الهواء.",
+    btn_proto:"استكشف المفاعل والمحاكي",btn_matrix:"نتائج تحاليل حمأة قنا",
+    kpi1_l:"المنهجية الأساسية",kpi1_v:"استغلال التركيبة الكاملة",kpi2_l:"الملوث المستهدف",kpi2_v:"غاز الأوزون الأرضي (O₃)",
+    kpi3_l:"مصدر المادة الخام",kpi3_v:"مخلفات محطات مياه قنا",kpi4_l:"الهدف الهندسي",kpi4_v:"كفاءة إزالة أعلى من 85%",
+    sci_tag:"01 — الابتكار ومنهجية البحث",sci_title:"حافظ على التركيبة الكاملة.. لا تعزل عنصراً واحداً.",
+    sci_sub:"بدلاً من الاستخلاص الكيميائي المكلف، يستغل مشروع VEXO التآزر الطبيعي بين أكاسيد الحديد والمنجنيز والسيليكا الموجودة في حمأة قنا.",
+    conv_tag:"الطريقة التقليدية • تكلفة عالية",conv_h:"استخلاص عنصر واحد فقط",
+    conv_1:"فصل معدن واحد كيميائياً من الحمأة.",conv_2:"استهلاك عالٍ للطاقة ومخلفات كيميائية ثانوية.",conv_3:"يتطلب إضافات صناعية باهظة الثمن (مثل CeO₂).",
+    vexo_tag:"ابتكار VEXO • اقتصاد دائري",vexo_h:"تثمين التركيبة المتكاملة للحمأة",
+    vexo_1:"استخدام تركيبة حمأة قنا الطبيعية كما هي.",vexo_2:"هندسة فيزيائية بسيطة بالغسيل والتشكيل لحبيبات.",vexo_3:"تفاعل تآزري نشط بين (Fe₂O₃–MnO₂–SiO₂).",
+    meth_h:"المجموعات التجريبية القياسية",
+    m1:"مفاعل فارغ لقياس التحلل الطبيعي للأوزون.",m2:"حمأة قنا الخام المجففة لقياس النشاط الأساسي.",
+    m3:"الحمأة المغسولة والمشكلة لمنع انسداد الهواء.",m4:"محفز تجاري (MnO₂ / كربون نشط) للمقارنة.",
+    mat_tag:"02 — النتائج المعملية الأولية",mat_title:"التحليل الكيميائي لأكاسيد حمأة قنا",
+    mat_sub:"اضغط على أي عنصر أدناه لمعرفة دوره التحفيزي أو البنائي في تكسير الأوزون.",
+    role_lbl:"الدور الوظيفي للعنصر",
+    status_note:"الوضع الحالي: تم الانتهاء من التحاليل الكيميائية وحيود الأشعة السينية (XRD)، وجارٍ العمل على الغسيل واختبارات الأوزون.",
+    pro_tag:"03 — البروتوتايب والمحاكاة",pro_title:"المفاعل التفاعلي ذو التدفق الرأسي",
+    pro_sub:"اضغط على أي مرحلة من مراحل المفاعل لاستعراض وظيفتها الهندسية.",
+    sim_h:"محاكي حساب كفاءة إزالة الأوزون",cin_lbl:"تركيز الأوزون الداخل (C_in):",cout_lbl:"تركيز الأوزون الخارج (C_out):",eff_lbl:"نسبة كفاءة الإزالة",
+    team_tag:"04 — فريق البحث والمراجع",team_title:"فريق مشروع VEXO",team_sub:"باحثتان • محافظة قنا، مصر",
+    n_name:"نور الهدى سعد",s_name:"سارة جمعة",role_co:"باحثة رئيسية مشاركة",
+    n_bio:"مسؤولة عن تجميع العينات، التحاليل الكيميائية (XRD/XRF)، وتحسين خصائص المادة المحفزة.",
+    s_bio:"مسؤولة عن تصميم المفاعل الهندسي، ديناميكا تدفق الهواء، واختبارات مقاومة الرطوبة.",
+    ref_h:"أهم المراجع العلمية",footer:"مشروع VEXO البحثي • هندسة حمأة معالجة المياه لتنقية الهواء • قنا، مصر",
+    pass:"✓ يحقق الهدف الهندسي (>85%)",warn:"⚠ أقل من الكفاءة المستهدفة (85%)"
+  }
+};
+const oxides=[
+  {en:"Silicon Dioxide (SiO₂)",ar:"ثاني أكسيد السيليكون (SiO₂)",p:48.14,c:"#94a3b8",d_en:"Forms the porous structural backbone and high-surface-area support matrix that disperses active metal oxides.",d_ar:"يشكل الهيكل المسامي الداعم ذو المساحة السطحية العالية الذي يوزع الأكاسيد النشطة."},
+  {en:"Aluminum Oxide (Al₂O₃)",ar:"أكسيد الألومنيوم (Al₂O₃)",p:21.41,c:"#38bdf8",d_en:"Enhances mechanical strength of sludge granules and provides thermal stability during regeneration.",d_ar:"يعزز المتانة الميكانيكية لحبيبات الحمأة ويمنحها استقراراً حرارياً أثناء دورات إعادة الاستخدام."},
+  {en:"Iron Oxide (Fe₂O₃)",ar:"أكسيد الحديد (Fe₂O₃)",p:10.61,c:"#f59e0b",d_en:"Provides abundant surface redox sites (Fe³⁺/Fe²⁺) and enhances structural moisture resistance when interacting with manganese phases.",d_ar:"يوفر مواقع أكسدة واختزال نشطة ويعزز مقاومة المادة للرطوبة عند تداخله مع أكاسيد المنجنيز."},
+  {en:"Calcium & Sulfates (CaO/SO₃)",ar:"مركبات الكالسيوم والكبريتات",p:11.14,c:"#818cf8",d_en:"Influences surface alkalinity and pore structure; regulated via pre-washing treatment.",d_ar:"يؤثر على قاعدية السطح وبنية المسام، ويتم ضبط نسبته من خلال خطوة الغسيل المسبق."},
+  {en:"Manganese Dioxide (MnO₂)",ar:"ثاني أكسيد المنجنيز (MnO₂)",p:1.01,c:"#10b981",d_en:"Primary catalytic active phase known for rapid electron transfer and decomposition of O₃ into O₂.",d_ar:"الطور التحفيزي النشط الرئيسي المسؤول عن نقل الإلكترونات وتكسير غاز الأوزون (O₃) إلى أكسجين (O₂)."}
+];
+const stages=[
+  {b_en:"Stage 5 • Top Outlet",b_ar:"المرحلة 5 • المخرج العلوي",t_en:"Perforated Air Outlet & C_out Sensor",t_ar:"مخرج الهواء النقي وحساس القياس الخارجي",d_en:"Releases purified air after catalytic decomposition and houses the outlet ozone sensor (C_out) to measure real-time removal efficiency.",d_ar:"يسمح بخروج الهواء النقي بعد تكسير الأوزون ويضم الحساس الخارجي (C_out) لقياس كفاءة الإزالة لحظياً."},
+  {b_en:"Stage 4 • Upper Mesh",b_ar:"المرحلة 4 • الشبكة العلوية",t_en:"Upper Retaining Mesh",t_ar:"شبكة التثبيت العلوية",d_en:"Prevents fine granules from escaping during high airflow rates while maintaining minimal pressure drop.",d_ar:"تمنع تطاير حبيبات الحمأة مع تدفق الهواء المرتفع دون التسبب في إعاقة مرور الهواء."},
+  {b_en:"Stage 3 • Active Core",b_ar:"المرحلة 3 • قلب المفاعل",t_en:"Whole Engineered Sludge Bed",t_ar:"طبقة الحمأة الهندسية المتكاملة",d_en:"Packed bed of washed, granulated Qena groundwater sludge where Fe₂O₃, MnO₂, and SiO₂ synergistically decompose O₃ into O₂.",d_ar:"الطبقة النشطة المكونة من حبيبات حمأة قنا المغسولة حيث تتفاعل الأكاسيد معاً لتكسير الأوزون."},
+  {b_en:"Stage 2 • Lower Mesh",b_ar:"المرحلة 2 • الشبكة السفلية",t_en:"Bottom Support Mesh",t_ar:"شبكة الدعم وتوزيع الهواء",d_en:"Supports the catalytic bed weight and ensures uniform airflow distribution across the entire cross-section.",d_ar:"تحمل وزن طبقة الحمأة وتضمن توزيع الهواء بالتساوي على كامل مساحة المفاعل."},
+  {b_en:"Stage 1 • Base Inlet",b_ar:"المرحلة 1 • القاعدة والمدخل",t_en:"Air Inlet, Fan & C_in Sensor",t_ar:"مدخل الهواء والمروحة والحساس الداخلي",d_en:"Draws ozone-laden air into the vertical chamber at a controlled flow rate and measures baseline inlet concentration (C_in).",d_ar:"تسحب المروحة الهواء المحمل بالأوزون بمعدل تدفق ثابت مع قياس التركيز الابتدائي (C_in)."}
+];
+function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'})}
+function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);document.getElementById('theme-btn').innerText=n==='dark'?'☀️ Light':'🌙 Dark'}
+
 
 
