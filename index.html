@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark" data-accent="emerald">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VEXO — Engineered Sludge for Ozone Removal</title>
+<style>
+  :root[data-theme="dark"] {
+    --bg: #070b14; --surface: #0f172a; --hover: #1e293b; --border: #1e293b;
+    --text: #f8fafc; --muted: #94a3b8; --nav-bg: rgba(7, 11, 20, 0.92); --sim-bg: #05080f;
+  }
+  :root[data-theme="light"] {
+    --bg: #f1f5f9; --surface: #ffffff; --hover: #e2e8f0; --border: #cbd5e1;
+    --text: #0f172a; --muted: #475569; --nav-bg: rgba(255, 255, 255, 0.92); --sim-bg: #f8fafc;
+  }
+  :root[data-accent="emerald"] { --primary: #10b981; --sec: #38bdf8; --glow: rgba(16, 185, 129, 0.2); }
+  :root[data-accent="blue"]    { --primary: #3b82f6; --sec: #8b5cf6; --glow: rgba(59, 130, 246, 0.2); }
+  :root[data-accent="amber"]   { --primary: #f59e0b; --sec: #10b981; --glow: rgba(245, 158, 11, 0.2); }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, 'Segoe UI', Tahoma, sans-serif; }
+  body { background: var(--bg); color: var(--text); line-height: 1.65; transition: background 0.3s, color 0.3s; min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* Navbar */
+  nav {
+    position: sticky; top: 0; z-index: 100; background: var(--nav-bg); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border); padding: 0.8rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;
+  }
+  .logo { font-size: 1.5rem; font-weight: 900; background: linear-gradient(90deg, var(--primary), var(--sec)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
+  .nav-links { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+  .nav-btn {
+    background: transparent; border: none; color: var(--muted); font-size: 0.88rem; font-weight: 700;
+    padding: 0.45rem 0.85rem; border-radius: 0.6rem; cursor: pointer; transition: 0.2s;
+  }
+  .nav-btn:hover, .nav-btn.active { color: var(--primary); background: var(--glow); }
+  .controls { display: flex; gap: 0.5rem; align-items: center; }
+  .ctrl-btn {
+    background: var(--surface); border: 1px solid var(--border); color: var(--text);
+    padding: 0.4rem 0.75rem; border-radius: 0.6rem; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: 0.2s;
+  }
+  .ctrl-btn:hover { border-color: var(--primary); }
+
+  /* Pages System */
+  .container { max-width: 1100px; width: 100%; margin: 0 auto; padding: 2.5rem 1.5rem; flex: 1; }
+  .page { display: none; animation: fadeIn 0.35s ease; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Typography & UI */
+  .pill { display: inline-block; background: var(--surface); border: 1px solid var(--border); color: var(--sec); padding: 0.35rem 0.9rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; line-height: 1.2; margin-bottom: 1rem; }
+  .grad { background: linear-gradient(90deg, var(--primary), var(--sec)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 0.6rem; }
+  h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
+  .tag { color: var(--primary); font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 0.3rem; }
+  .sub { color: var(--muted); max-width: 720px; margin-bottom: 2rem; font-size: 1rem; }
+
+  .btn { padding: 0.8rem 1.5rem; border-radius: 0.75rem; font-weight: 700; font-size: 0.92rem; cursor: pointer; border: none; transition: 0.2s; }
+  .btn-p { background: var(--primary); color: #fff; box-shadow: 0 4px 18px var(--glow); }
+  .btn-p:hover { transform: translateY(-2px); filter: brightness(1.08); }
+  .btn-o { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+  .btn-o:hover { border-color: var(--primary); }
+
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 1.2rem; padding: 1.6rem; transition: 0.25s; }
+  .card-hi { border-color: var(--primary); box-shadow: 0 0 25px var(--glow); }
+  ul.list { list-style: none; }
+  ul.list li { margin-bottom: 0.7rem; color: var(--muted); font-size: 0.92rem; display: flex; gap: 0.6rem; align-items: flex-start; }
+
+  /* Interactive Bars */
+  .ox-item { margin-bottom: 0.9rem; cursor: pointer; padding: 0.6rem; border-radius: 0.75rem; border: 1px solid transparent; transition: 0.2s; }
+  .ox-item:hover, .ox-act { background: var(--hover); border-color: var(--primary); }
+  .ox-head { display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.35rem; }
+  .bar-bg { background: var(--border); height: 10px; border-radius: 999px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 999px; }
+
+  /* Reactor Buttons */
+  .l-btn { width: 100%; text-align: center; padding: 0.9rem; margin-bottom: 0.6rem; background: var(--surface); border: 1px solid var(--border); border-radius: 0.85rem; color: var(--text); cursor: pointer; transition: 0.2s; display: block; }
+  .l-btn:hover, .l-btn.act { border-color: var(--primary); background: var(--glow); transform: scale(1.01); }
+  .l-st { font-size: 0.72rem; font-weight: 800; color: var(--sec); display: block; margin-bottom: 0.15rem; }
+
+  /* Simulator */
+  input[type="range"] { width: 100%; accent-color: var(--primary); margin: 0.5rem 0 1.4rem; cursor: pointer; }
+  .sim-box { background: var(--sim-bg); border: 1px solid var(--border); border-radius: 1rem; padding: 1.8rem; text-align: center; }
+  .big { font-size: 3.2rem; font-weight: 900; color: var(--primary); line-height: 1.1; margin: 0.4rem 0; }
+
+  /* Team */
+  .t-card { display: flex; align-items: center; gap: 1.2rem; }
+  .avatar { width: 90px; height: 90px; border-radius: 1rem; object-fit: cover; border: 2px solid var(--primary); flex-shrink: 0; }
+
+  footer { text-align: center; padding: 1.5rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" onclick="go('home')">VEXO</div>
+  <div class="nav-links">
+    <button class="nav-btn active" data-page="home" onclick="go('home')" data-i18n="nav_home">Home</button>
+    <button class="nav-btn" data-page="science" onclick="go('science')" data-i18n="nav_science">Innovation & Method</button>
+    <button class="nav-btn" data-page="matrix" onclick="go('matrix')" data-i18n="nav_matrix">Lab Matrix</button>
+    <button class="nav-btn" data-page="prototype" onclick="go('prototype')" data-i18n="nav_proto">Prototype & Sim</button>
+    <button class="nav-btn" data-page="team" onclick="go('team')" data-i18n="nav_team">Team & Refs</button>
+  </div>
+  <div class="controls">
+    <button class="ctrl-btn" onclick="toggleTheme()" id="theme-btn">☀️ Light</button>
+    <button class="ctrl-btn" onclick="toggleAccent()">🎨 Color</button>
+    <button class="ctrl-btn" onclick="toggleLang()" id="lang-btn">عربي</button>
+  </div>
+</nav>
+
+<div class="container">
+  <!-- PAGE 1: HOME -->
+  <div id="page-home" class="page active">
+    <div style="text-align:center; padding: 2rem 0;">
+      <span class="pill" data-i18n="hero_pill">ISEF Research Project • Qena, Egypt</span>
+      <h1><span data-i18n="hero_t1">Engineering Waste.</span><br><span class="grad" data-i18n="hero_t2">Rethinking Clean Air.</span></h1>
+      <p class="sub" style="margin: 0 auto 2rem;" data-i18n="hero_desc">
+        Transforming native whole groundwater-treatment sludge from Qena into a cost-effective, multifunctional catalytic material for gas-phase ozone (O₃) removal.
+      </p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-p" onclick="go('prototype')" data-i18n="btn_proto">Inspect Prototype & Simulator</button>
+        <button class="btn btn-o" onclick="go('matrix')" data-i18n="btn_matrix">View Qena Lab Results</button>
+      </div>
+    </div>
+
+    <div class="grid-4">
+      <div class="card">
+        <div style="font-size:0.78rem; color:var(--muted);" data-i18n="kpi1_l">Core Approach</div>
+        <div style="font-weight:800; color:var(--primary); margin-top:0.2rem;" data-i18n="kpi1_v">Whole-Matrix Retention</div>
+      </div>
+      <div class="card">
+        <div style="font-size:0.78rem; color:var(--muted);" data-i18n="kpi2_l">Target Pollutant</div>
+        <div style="font-weight:800; color:var(--sec); margin-top:0.2rem;" data-i18n="kpi2_v">Ground-Level Ozone (O₃)</div>
+      </div>
+      <div class="card">
+        <div style="font-size:0.78rem; color:var(--muted);" data-i18n="kpi3_l">Feedstock Source</div>
+        <div style="font-weight:800; margin-top:0.2rem;" data-i18n="kpi3_v">Qena Water Residuals</div>
+      </div>
+      <div class="card">
+        <div style="font-size:0.78rem; color:var(--muted);" data-i18n="kpi4_l">Engineering Target</div>
+        <div style="font-weight:800; color:#f59e0b; margin-top:0.2rem;" data-i18n="kpi4_v">&gt;85% O₃ Removal</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="page-science" class="page">
+    <span class="tag" data-i18n="sci_tag">01 — Novelty & Methodology</span>
+    <h2 data-i18n="sci_title">Keep the matrix. Don't isolate one component.</h2>
+    <p class="sub" data-i18n="sci_sub">Instead of energy-intensive chemical extraction, VEXO utilizes the natural synergy of iron, manganese, and aluminosilicates present in Qena sludge.</p>
+
