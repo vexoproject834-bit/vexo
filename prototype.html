@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VEXO | Prototype & Mechanism</title>
+<style>
+  :root[data-theme="dark"] { --bg:#060a12; --surface:#0e1626; --card:#131d31; --border:#1e2d4a; --primary:#10b981; --sec:#38bdf8; --accent:#f59e0b; --text:#f8fafc; --muted:#94a3b8; }
+  :root[data-theme="light"] { --bg:#f1f5f9; --surface:#ffffff; --card:#f8fafc; --border:#cbd5e1; --primary:#059669; --sec:#0284c7; --accent:#d97706; --text:#0f172a; --muted:#475569; }
+  * { box-sizing:border-box; margin:0; padding:0; font-family:system-ui,-apple-system,'Segoe UI',sans-serif; }
+  body { background:var(--bg); color:var(--text); line-height:1.6; transition:0.3s; min-height:100vh; display:flex; flex-direction:column; }
+  nav { position:sticky; top:0; z-index:100; background:var(--surface); border-bottom:1px solid var(--border); padding:0.8rem 1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; }
+  .brand { font-size:1.4rem; font-weight:900; color:var(--primary); text-decoration:none; }
+  .nav-links { display:flex; gap:0.5rem; flex-wrap:wrap; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:0.85rem; font-weight:700; padding:0.4rem 0.7rem; border-radius:0.5rem; transition:0.2s; }
+  .nav-links a:hover, .nav-links a.active { color:var(--primary); background:rgba(16,185,129,0.12); }
+  .tools { display:flex; gap:0.4rem; }
+  .t-btn { background:var(--card); border:1px solid var(--border); color:var(--text); padding:0.35rem 0.65rem; border-radius:0.5rem; font-size:0.78rem; font-weight:700; cursor:pointer; }
+  .container { max-width:1100px; width:100%; margin:0 auto; padding:2.5rem 1.5rem; flex:1; }
+  .pill { display:inline-block; background:rgba(16,185,129,0.12); color:var(--primary); border:1px solid rgba(16,185,129,0.3); padding:0.3rem 0.85rem; border-radius:999px; font-size:0.75rem; font-weight:800; margin-bottom:0.8rem; }
+  h2 { font-size:clamp(1.5rem,3vw,2.1rem); font-weight:800; margin-bottom:0.5rem; }
+  h3 { font-size:1.1rem; font-weight:800; margin-bottom:0.5rem; }
+  .sub { color:var(--muted); max-width:750px; margin-bottom:2rem; font-size:0.96rem; }
+  .grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; margin-bottom:2.5rem; }
+  .grid-4 { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin-bottom:2.5rem; }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:1rem; padding:1.5rem; }
+  .card-hi { border-color:var(--primary); }
+  .proto-img { width:100%; border-radius:0.85rem; border:1px solid var(--border); object-fit:cover; }
+  input[type="range"] { width:100%; accent-color:var(--primary); margin:0.5rem 0 1.2rem; cursor:pointer; }
+  .sim-box { background:var(--card); border:1px solid var(--border); border-radius:0.85rem; padding:1.5rem; text-align:center; }
+  .big { font-size:3rem; font-weight:900; color:var(--primary); line-height:1.1; margin:0.4rem 0; }
+  footer { text-align:center; padding:1.5rem; color:var(--muted); font-size:0.85rem; border-top:1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="brand">VEXO</a>
+  <div class="nav-links">
+    <a href="index.html" data-i18n="n1">Home</a>
+    <a href="problem.html" data-i18n="n2">Problem & Solutions</a>
+    <a href="prototype.html" class="active" data-i18n="n3">Prototype & Mechanism</a>
+    <a href="results.html" data-i18n="n4">Lab Results</a>
+    <a href="business.html" data-i18n="n5">Business & Team</a>
+  </div>
+  <div class="tools">
+    <button class="t-btn" onclick="toggleLang()" id="lang-btn">عربي</button>
+    <button class="t-btn" onclick="toggleTheme()" id="theme-btn">☀️ Light</button>
+  </div>
+</nav>
+
+<div class="container">
+  <span class="pill" data-i18n="tag1">03 • Engineering Design & Prototype</span>
+  <h2 data-i18n="h1">VEXO Vertical Fixed-Bed Catalytic Reactor</h2>
+  <p class="sub" data-i18n="s1">Modular cylindrical reactor engineered for low pressure drop, uniform airflow, and real-time sensor validation.</p>
+
+  <div class="grid-2" style="align-items:center;">
+    <div class="card">
+      <img src="prototype.png" onerror="this.src='https://placehold.co'" alt="VEXO Prototype" class="proto-img">
+      <p style="font-size:0.8rem; color:var(--muted); text-align:center; margin-top:0.6rem;" data-i18n="img_cap">Exploded & Assembled View of VEXO Catalytic Reactor</p>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:1rem;">
+      <div class="card card-hi">
+        <h3 data-i18n="c1_t">🔬 Whole-Matrix Synergistic Principle</h3>
+        <p style="font-size:0.88rem; color:var(--muted);" data-i18n="c1_d">Retains Qena sludge's native SiO₂ (48.14%) & Al₂O₃ (21.41%) as a porous mechanical support while Fe₂O₃ (10.61%) & MnO₂ (1.01%) catalyze O₃ breakdown.</p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="c2_t">⚗️ Surface Redox Reaction Mechanism</h3>
+        <p style="font-size:0.85rem; color:var(--muted); font-family:monospace;">
+          Step 1: O₃ + Mn³⁺/Fe²⁺ → O₂ + O⁻(ads) + Mn⁴⁺/Fe³⁺<br>
+          Step 2: O₃ + O⁻(ads) → 2O₂ + e⁻ (Site Regeneration)
+        </p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="c3_t">🌬️ Airflow & Sensor Architecture</h3>
+        <p style="font-size:0.88rem; color:var(--muted);" data-i18n="c3_d">Bottom DC fan draws polluted air through a 2–4 mm granulated sludge bed held by stainless meshes, monitored by dual C_in and C_out ozone sensors.</p>
+      </div>
+    </div>
+  </div>
+
+  <span class="pill" data-i18n="tag2">04 • Processing & Validation</span>
+  <h2 data-i18n="h2">4-Step Engineering Workflow</h2>
+  <div class="grid-4" style="margin-top:1rem;">
+    <div class="card"><strong style="color:var(--primary);">01. Pre-Washing</strong><p style="font-size:0.84rem; color:var(--muted); margin-top:0.4rem;" data-i18n="w1">Removes soluble salts & organic impurities to expose active Fe/Mn sites.</p></div>
+    <div class="card"><strong style="color:var(--sec);">02. Granulation</strong><p style="font-size:0.84rem; color:var(--muted); margin-top:0.4rem;" data-i18n="w2">Forms 2–4 mm pellets to prevent airflow blockage (ΔP &lt; 20 Pa).</p></div>
+    <div class="card"><strong style="color:var(--accent);">03. O₃ Catalysis</strong><p style="font-size:0.84rem; color:var(--muted); margin-top:0.4rem;" data-i18n="w3">Converts toxic O₃ directly into breathable O₂ at room temperature.</p></div>
+    <div class="card"><strong style="color:var(--primary);">04. Regeneration</strong><p style="font-size:0.84rem; color:var(--muted); margin-top:0.4rem;" data-i18n="w4">Fe–Mn synergy resists humidity and restores activity via mild heating.</p></div>
+  </div>
+
+  <div class="card card-hi">
+    <h3 data-i18n="sim_h">📊 Live Ozone Removal Efficiency Simulator</h3>
+    <p style="font-size:0.86rem; color:var(--muted); margin-bottom:1.2rem;">η (%) = [(C_in − C_out) / C_in] × 100</p>
+    <div class="grid-2" style="align-items:center; margin-bottom:0;">
+      <div>
+        <div style="display:flex; justify-content:space-between; font-size:0.9rem;"><span data-i18n="cin_l">Inlet Ozone (C_in):</span><strong style="color:var(--sec);"><span id="cin-t">100</span> ppm</strong></div>
+        <input type="range" id="cin" min="20" max="200" value="100" oninput="sim()">
+        <div style="display:flex; justify-content:space-between; font-size:0.9rem;"><span data-i18n="cout_l">Outlet Ozone (C_out):</span><strong style="color:var(--primary);"><span id="cout-t">12</span> ppm</strong></div>
+        <input type="range" id="cout" min="0" max="100" value="12" oninput="sim()">
+      </div>
+      <div class="sim-box">
+        <div style="font-size:0.8rem; color:var(--muted);" data-i18n="eff_l">Calculated Efficiency</div>
+        <div class="big" id="eff-t">88.0%</div>
+        <div id="eff-b" style="font-weight:700; font-size:0.85rem;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer><strong>VEXO</strong> — Engineered Groundwater-Treatment Sludge for Clean Air • Qena, Egypt</footer>
+
+<script>
+const ar={n1:"الرئيسية",n2:"المشكلة والحلول",n3:"البروتوتايب والميكانيزم",n4:"نتائج التحاليل",n5:"الجدوى والفريق",tag1:"03 • التصميم الهندسي والبروتوتايب",h1:"مفاعل VEXO التحفيزي ذو التدفق الرأسي",s1:"مفاعل أسطواني مصمم لتقليل مقاومة الهواء وضمان التوزيع المتساوي مع قياس الكفاءة لحظياً.",img_cap:"منظور تفصيلي ومجمع لمفاعل VEXO التحفيزي",c1_t:"🔬 مبدأ التآزر للتركيبة الكاملة",c1_d:"الحفاظ على السيليكا (48.14%) والألومينا (21.41%) كدعامة مسامية بينما يقوم الحديد (10.61%) والمنجنيز (1.01%) بتكسير الأوزون.",c2_t:"⚗️ آلية التفاعل الكيميائي (Redox)",c3_t:"🌬️ هندسة التدفق والحساسات",c3_d:"مروحة سفلية تدفع الهواء عبر حبيبات الحمأة (2-4 مم) المثبتة بشبك ستانلس مع حساسين لقياس الأوزون قبل وبعد الفلتر.",tag2:"04 • خطوات المعالجة والتحقق",h2:"مراحل العمل الهندسية الأربع",w1:"إزالة الأملاح الذائبة والشوائب لكشف المواقع النشطة.",w2:"تشكيل حبيبات (2-4 مم) لمنع انسداد مرور الهواء.",w3:"تحويل الأوزون السام إلى أكسجين نقي في درجة حرارة الغرفة.",w4:"مقاومة الرطوبة وإمكانية التنشيط الحراري لعدة دورات.",sim_h:"📊 محاكي حساب كفاءة إزالة الأوزون",cin_l:"تركيز الأوزون الداخل (C_in):",cout_l:"تركيز الأوزون الخارج (C_out):",eff_l:"نسبة كفاءة الإزالة",pass:"✓ يحقق الهدف الهندسي (>85%)",warn:"⚠ أقل من الكفاءة المستهدفة (85%)"};
+const en={};document.querySelectorAll('[data-i18n]').forEach(e=>en[e.getAttribute('data-i18n')]=e.innerText);
+let lang=localStorage.getItem('vexo_lang')||'en';
+let theme=localStorage.getItem('vexo_theme')||'dark';
